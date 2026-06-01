@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inicio de Sesión</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <form class="row g-3">
+      <div class="col-md-6">
+        <label for="NombreUsuario" class="form-label">Nombre de Usuario</label>
+        <input type="text" class="form-control" id="NombreUsuario" />
+      </div>
+      <div class="col-md-6">
+        <label for="Contraseña" class="form-label">Contraseña</label>
+        <input type="password" class="form-control" id="Contraseña" />
+      </div>
+      <div class="col-12">
+        <label for="Dirección" class="form-label">Dirección</label>
+        <input
+          type="text"
+          class="form-control"
+          id="Dirección"
+          placeholder="Av. Alem 1234"
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="Ciudad" class="form-label">Ciudad</label>
+        <input type="text" class="form-control" id="Ciudad" />
+      </div>
+      <div class="col-md-2">
+        <label for="CodigoPostal" class="form-label">Codigo Postal</label>
+        <input type="text" class="form-control" id="CodigoPostal" />
+      </div>
+      <div class="col-12">
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="TerminosYcondiciones"
+          />
+          <label class="form-check-label" for="TerminosYcondiciones">
+            Acepto los términos y condiciones
+          </label>
+        </div>
+      </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">Registrarse</button>
+      </div>
+    </form>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
