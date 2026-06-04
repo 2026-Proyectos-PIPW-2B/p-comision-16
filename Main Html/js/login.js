@@ -2,7 +2,8 @@ let usuarios = []
 window.addEventListener("load", iniciar)
 
 function iniciar(){
-    usuarios = JSON.parse(localStorage.getItem("Users"))
+    if(JSON.parse(localStorage.getItem("Users") != null))
+        usuarios = JSON.parse(localStorage.getItem("Users"))
     const inputNombre = document.getElementById("usuario")
     const inputContrasena = document.getElementById("contrasena")
     const btn = document.getElementById("btn-login")
@@ -14,39 +15,56 @@ function iniciar(){
 }
 
 function validarUsuario(nombre,contrasena){
-    validarContrasena(validarNombre(nombre), contrasena)
+    const user = validarContrasena(validarNombre(nombre), contrasena)
+    if(user != null){
+        setTimeout(() => {
+            if(user.profile === "Usuario_Final")
+                location.href = "Catalogo.html"
+            if(user.profile === "Administrador")
+                location.href = "Administracion.html"
+        }, 1000);
+    }
 }
 
 function validarNombre(nombre){
+    if(usuarios.length === 0){
+        invalidField(nombre)
+    }
     for(i=0;i<usuarios.length;i++){
-        if(nombre.value === usuarios[i].name){
-            nombre.classList.remove("is-invalid")
-            nombre.classList.add("is-valid")
-            return usuarios[i].password
+        const user = usuarios[i]
+        if(nombre.value === user.name){
+            validField(nombre)
+            return user
         } else{
-            nombre.classList.remove("is-valid")
-            nombre.classList.add("is-invalid")
+            invalidField(nombre)
         }
     }
 }
 
-function validarContrasena(contrasenaDeUsuario, contrasena){
-    if(contrasenaDeUsuario === contrasena.value){
-        contrasena.classList.remove("is-invalid")
-        contrasena.classList.add("is-valid")
-        setTimeout(() => {
-            location.href = "Catalogo.html"
-        }, 1000);
+function validarContrasena(usuarioVerificado, contrasena){
+    if(usuarioVerificado != undefined && usuarioVerificado.password === contrasena.value){
+        validField(contrasena)
+        return usuarioVerificado
     } else{
-        contrasena.classList.remove("is-valid")
-        contrasena.classList.add("is-invalid")
+        invalidField(contrasena)
     }
 }
 
-function crearUsuario(nombre,contrasena){
+function validField(campo){
+    campo.classList.remove("is-invalid")
+    campo.classList.add("is-valid")
+}
+
+function invalidField(campo){
+    campo.classList.remove("is-valid")
+    campo.classList.add("is-invalid")
+}
+
+function crearUsuario(nombre,contrasena,perfil){
     const usuario ={
         name: nombre,
-        password: contrasena
+        password: contrasena,
+        profile: perfil
     }
     usuarios.push(usuario)
     localStorage.setItem("Users", JSON.stringify(usuarios))
