@@ -79,7 +79,7 @@
               class="form-control bg-dark text-light border-secondary"
               required
             />
-            <div class="invalid-feedback"></div>
+            <div class="invalid-feedback" id="nombreError"></div>
           </div>
           <div class="col-md-6">
             <label for="contrasena" class="form-label">Contraseña</label>
@@ -90,7 +90,7 @@
               class="form-control bg-dark text-light border-secondary"
               required
             />
-            <div class="invalid-feedback"></div>
+            <div class="invalid-feedback">La contraseña debe contener 8 caracteres (al menos una mayúscula, una minúscula, un número y un símbolo)</div>
           </div>
           <div class="col-12">
             <label for="direccion" class="form-label">Dirección de envío</label>
@@ -139,19 +139,22 @@
           </div>
           <div class="col-md-6">
             <label for="telefono" class="form-label">Teléfono</label>
-            <input
-              id="telefono"
-              name="telefono"
-              type="tel"
-              class="form-control bg-dark text-light border-secondary"
-              required
-            />
-            <div class="invalid-feedback">
-              Ingrese un número de teléfono válido.
+            <div class="input-group">
+              <span class="p-2">+54 9</span>
+              <input
+                id="telefono"
+                name="telefono"
+                type="tel"
+                class="form-control bg-dark text-light border-secondary"
+                required
+              />
+              <div class="invalid-feedback">
+                Ingrese un número de teléfono válido.
+              </div>
             </div>
           </div>
           <div class="col-12">
-            <button id="btn-login" type="submit" class="btn btn-primary">
+            <button id="btn-register" type="submit" class="btn btn-primary">
               Ingresar
             </button>
           </div>
