@@ -29,27 +29,78 @@ function iniciarRegistro(){
 }
 
 function validacionRegistro(nombre, contrasena, direccion, ciudad, codigoPostal, provincia, telefono){
-    if(validarNombre(nombre) && validarContrasena(contrasena)){
+    if(validarNombre(nombre) && validarContrasena(contrasena) && validarDireccion(direccion) && validarCiudadProvincia(ciudad) && validarCodigoPostal(codigoPostal) && validarCiudadProvincia(provincia) && validarTelefono(telefono)){
         crearUsuario(nombre.value, contrasena.value, direccion.value, ciudad.value, codigoPostal.value, provincia.value, telefono.value)
     }
 }
 
 function validarNombre(nombre){
-    if(validator.isAlphanumeric(nombre.value) && nombre.value.length > 4){
-        validField(nombre)
-        return true
+    if(estaNombre(nombre.value)){
+        if(validator.isAlphanumeric(nombre.value) && nombre.value.length > 4){
+            validField(nombre)
+            return true
+        } else{
+            invalidField(nombre)
+            document.getElementById("nombreError").textContent = "Usuario invalido"
+        }
     } else{
+        document.getElementById("nombreError").textContent = "El nombre de usuario ya existe"
         invalidField(nombre)
     }
 }
 
 function validarContrasena(contrasena){
-    if(contrasena.value.length > 8){
+    if(validator.isStrongPassword(contrasena.value)){
         validField(contrasena)
         return true
     } else{
         invalidField(contrasena)
     }
+}
+
+function validarDireccion(direccion){
+    if(!validator.isEmpty(direccion.value)){
+        validField(direccion)
+        return true
+    } else{
+        invalidField(direccion)
+    }
+}
+
+function validarCiudadProvincia(ciudadProvincia){
+    if(ciudadProvincia.value.length > 7){
+        validField(ciudadProvincia)
+        return true
+    } else{
+        invalidField(ciudadProvincia)
+    }
+}
+
+function validarCodigoPostal(codigoPostal){
+    if((codigoPostal.value.length === 5 || codigoPostal.value.length === 4) && validator.isNumeric(codigoPostal.value)){
+        validField(codigoPostal)
+        return true
+    } else{
+        invalidField(codigoPostal)
+    }
+}
+
+function validarTelefono(telefono){
+    if(validator.isMobilePhone("549"+telefono.value,"es-AR")){
+        validField(telefono)
+        return true
+    } else{
+        invalidField(telefono)
+    }
+}
+
+function estaNombre(nombre){
+    for(n in usuarios){
+        if(nombre === usuarios[n].name){
+            return false
+        }
+    }
+    return true
 }
 
 function crearUsuario(nombre,contrasena, direccion, ciudad, codigoPostal, provincia, telefono, perfil = "usuario_final"){
