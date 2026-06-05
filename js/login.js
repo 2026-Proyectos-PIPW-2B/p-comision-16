@@ -1,9 +1,17 @@
-let usuarios = []
+const Admin = {
+    name: "A",
+    password: "1",
+    profile: "administrador"
+}
+let usuarios = [Admin]
 window.addEventListener("load", iniciar)
 
 function iniciar(){
-    if(JSON.parse(localStorage.getItem("users") != null))
+    if(localStorage.getItem("users") === null){
+        localStorage.setItem("users", JSON.stringify(usuarios))
+    } else{
         usuarios = JSON.parse(localStorage.getItem("users"))
+    }
     const inputNombre = document.getElementById("usuario")
     const inputContrasena = document.getElementById("contrasena")
     const btn = document.getElementById("btn-login")
