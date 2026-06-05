@@ -7,6 +7,14 @@ let usuarios = [Admin]
 window.addEventListener("load", iniciar)
 
 function iniciar(){
+    if(localStorage.getItem("usuarioActivo") != null){
+        const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"))
+        if (usuarioActivo.profile === "administrador"){
+            location.href = "administracion.html"
+        } else{
+            location.href = "catalogo.href"
+        }
+    }
     if(localStorage.getItem("users") === null){
         localStorage.setItem("users", JSON.stringify(usuarios))
     } else{
@@ -19,12 +27,12 @@ function iniciar(){
         e.preventDefault()
         validarUsuario(inputNombre, inputContrasena)
     })
-
 }
 
 function validarUsuario(nombre,contrasena){
     const user = validarContrasena(validarNombre(nombre), contrasena)
     if(user != null){
+        localStorage.setItem("usuarioActivo", JSON.stringify(user))
         setTimeout(() => {
             if(user.profile === "usuario_final")
                 location.href = "catalogo.html"
