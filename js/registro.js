@@ -116,7 +116,6 @@ function crearUsuario(nombre,contrasena, direccion, ciudad, codigoPostal, provin
     }
     usuarios.push(usuario)
     localStorage.setItem("users", JSON.stringify(usuarios))
-    window.alert("Usuario creado exitosamente")
 }
 
 function validField(campo){

@@ -1,0 +1,34 @@
+.form-select {
+  background-color: rgb(21, 0, 142);
+}
+.form-control {
+  background-color: rgb(21, 0, 142);
+}
+.carrito-dark-blue {
+  background-color: rgb(21, 0, 142);
+}
+.lista-dark-purple {
+  background-color: #4a217c;
+}
+.table-purple {
+  background-color: #4a217c;
+}
+
+.navbar-purple {
+  background-color: #593f79;
+}
+.producto .card {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.producto .card-body {
+  background-color: #444444;
+}
+.producto .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0.75rem 1.5rem rgba(255, 255, 255, 0.15);
+  border-color: #f8f9fa;
+}
