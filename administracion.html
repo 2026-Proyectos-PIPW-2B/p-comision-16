@@ -68,6 +68,10 @@
     <main id="main" class="container mt-4">
       <section id="admin" aria-label="Panel de administrador" class="mb-5">
         <h2 class="h5 mb-3">Administración</h2>
+        <select name="" id="adminSelect">
+          <option value="usuarios">Usuarios</option>
+          <option value="productos">Productos</option>
+        </select>
         <div class="row">
           <div id="admin-usuarios" class="col-md-6">
             <div class="card bg-dark text-light border-secondary">
@@ -98,7 +102,7 @@
               </div>
             </div>
           </div>
-          <div id="admin-productos" class="col-md-6">
+          <div id="admin-productos" class="col-md-6 visually-hidden">
             <div class="card bg-dark text-light border-secondary">
               <div class="card-body">
                 <h3 class="h6">Productos</h3>
@@ -138,5 +142,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="js/redireccion.js"></script>
+    <script src="js/admin.js"></script>
   </body>
 </html>
