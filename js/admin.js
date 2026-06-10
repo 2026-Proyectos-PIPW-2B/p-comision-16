@@ -3,7 +3,7 @@ window.addEventListener("load", ()=>{
     const tablaUsuarios = document.getElementById("admin-usuarios")
     const tablaProductos = document.getElementById("admin-productos")
     const timer = document.getElementById("timer")
-    timer.value = localStorage.getItem("timer")
+    timer.value = localStorage.getItem("timer")/60
     adminSelect.addEventListener("change",()=>{
         tablaUsuarios.classList.toggle("visually-hidden")
         tablaProductos.classList.toggle("visually-hidden")
