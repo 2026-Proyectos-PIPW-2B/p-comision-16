@@ -1,5 +1,8 @@
 window.addEventListener("load", redirigir)
 function redirigir(){
+    if(localStorage.getItem("timer") === null){
+        localStorage.setItem("timer", 600)
+    }
     const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"))
     if(usuarioActivo === null){
         window.alert("Debe iniciar sesión")
