@@ -1,3 +1,5 @@
+import { validField } from "./moduloCampos.js"
+import { invalidField } from "./moduloCampos.js"
 const Admin = {
     name: "A",
     password: "1",
@@ -29,7 +31,7 @@ function iniciarRegistro(){
 }
 
 function validacionRegistro(nombre, contrasena, direccion, ciudad, codigoPostal, provincia, telefono){
-    if(validarNombre(nombre) && validarContrasena(contrasena) && validarDireccion(direccion) && validarCiudadProvincia(ciudad) && validarCodigoPostal(codigoPostal) && validarCiudadProvincia(provincia) && validarTelefono(telefono)){
+    if(datosValidos(nombre, contrasena, direccion, ciudad, codigoPostal, provincia, telefono)){
         crearUsuario(nombre.value, contrasena.value, direccion.value, ciudad.value, codigoPostal.value, provincia.value, telefono.value)
     }
 }
@@ -40,12 +42,14 @@ function validarNombre(nombre){
             validField(nombre)
             return true
         } else{
-            invalidField(nombre)
             document.getElementById("nombreError").textContent = "Usuario invalido"
+            invalidField(nombre)
+            return false
         }
     } else{
         document.getElementById("nombreError").textContent = "El nombre de usuario ya existe"
         invalidField(nombre)
+        return false
     }
 }
 
@@ -55,6 +59,7 @@ function validarContrasena(contrasena){
         return true
     } else{
         invalidField(contrasena)
+        return false
     }
 }
 
@@ -64,6 +69,7 @@ function validarDireccion(direccion){
         return true
     } else{
         invalidField(direccion)
+        return false
     }
 }
 
@@ -73,6 +79,7 @@ function validarCiudadProvincia(ciudadProvincia){
         return true
     } else{
         invalidField(ciudadProvincia)
+        return false
     }
 }
 
@@ -82,6 +89,7 @@ function validarCodigoPostal(codigoPostal){
         return true
     } else{
         invalidField(codigoPostal)
+        return false
     }
 }
 
@@ -91,16 +99,43 @@ function validarTelefono(telefono){
         return true
     } else{
         invalidField(telefono)
+        return false
     }
 }
 
 function estaNombre(nombre){
-    for(n in usuarios){
+    for(const n in usuarios){
         if(nombre === usuarios[n].name){
             return false
         }
     }
     return true
+}
+
+function datosValidos(nombre, contrasena, direccion, ciudad, codigoPostal, provincia, telefono){
+    let esValido = true
+    if(!validarNombre(nombre)){
+        esValido = false
+    }
+    if(!validarContrasena(contrasena)){
+        esValido = false
+    }
+    if(!validarDireccion(direccion)){
+        esValido = false
+    }
+    if(!validarCiudadProvincia(ciudad)){
+        esValido = false
+    }
+    if(!validarCodigoPostal(codigoPostal)){
+        esValido = false
+    }
+    if(!validarCiudadProvincia(provincia)){
+        esValido = false
+    }
+    if(!validarTelefono(telefono)){
+        esValido = false
+    }
+    return esValido
 }
 
 function crearUsuario(nombre,contrasena, direccion, ciudad, codigoPostal, provincia, telefono, perfil = "usuario_final"){
@@ -116,14 +151,4 @@ function crearUsuario(nombre,contrasena, direccion, ciudad, codigoPostal, provin
     }
     usuarios.push(usuario)
     localStorage.setItem("users", JSON.stringify(usuarios))
-}
-
-function validField(campo){
-    campo.classList.remove("is-invalid")
-    campo.classList.add("is-valid")
-}
-
-function invalidField(campo){
-    campo.classList.remove("is-valid")
-    campo.classList.add("is-invalid")
 }

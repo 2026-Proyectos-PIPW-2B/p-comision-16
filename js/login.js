@@ -1,3 +1,5 @@
+import { validField } from "./moduloCampos.js"
+import { invalidField } from "./moduloCampos.js"
 const Admin = {
     name: "A",
     password: "1",
@@ -46,7 +48,7 @@ function validarNombre(nombre){
     if(usuarios.length === 0){
         invalidField(nombre)
     }
-    for(i=0;i<usuarios.length;i++){
+    for(let i=0;i<usuarios.length;i++){
         const user = usuarios[i]
         if(nombre.value === user.name){
             validField(nombre)
@@ -64,24 +66,4 @@ function validarContrasena(usuarioVerificado, contrasena){
     } else{
         invalidField(contrasena)
     }
-}
-
-function validField(campo){
-    campo.classList.remove("is-invalid")
-    campo.classList.add("is-valid")
-}
-
-function invalidField(campo){
-    campo.classList.remove("is-valid")
-    campo.classList.add("is-invalid")
-}
-
-function crearUsuario(nombre,contrasena,perfil){
-    const usuario ={
-        name: nombre,
-        password: contrasena,
-        profile: perfil
-    }
-    usuarios.push(usuario)
-    localStorage.setItem("users", JSON.stringify(usuarios))
 }

@@ -13,4 +13,9 @@ window.addEventListener("load", ()=>{
         localStorage.setItem("timer", timer.value*60)
         localStorage.setItem("time", 0)
     })
+
+    if(JSON.parse(localStorage.getItem("usuarioActivo")).profile != "administrador"){
+        window.alert("Esta vista es exclusiva para administradores")
+        location.href = "catalogo.html"
+    }
 })
