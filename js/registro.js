@@ -33,6 +33,7 @@ function iniciarRegistro(){
 function validacionRegistro(nombre, contrasena, direccion, ciudad, codigoPostal, provincia, telefono){
     if(datosValidos(nombre, contrasena, direccion, ciudad, codigoPostal, provincia, telefono)){
         crearUsuario(nombre.value, contrasena.value, direccion.value, ciudad.value, codigoPostal.value, provincia.value, telefono.value)
+        window.alert("Usuario registrado exitosamente")
     }
 }
 
