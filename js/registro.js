@@ -16,17 +16,17 @@ function iniciarRegistro(){
     }
     const btn = document.getElementById("btn-register")
     const usuarioARegistrar = document.querySelectorAll(".form-control")
-    const nombre = usuarioARegistrar[0]
-    const contrasena = usuarioARegistrar[1]
-    const direccion = usuarioARegistrar[2]
-    const ciudad = usuarioARegistrar[3]
-    const codigoPostal = usuarioARegistrar[4]
-    const provincia = usuarioARegistrar[5]
-    const telefono = usuarioARegistrar[6]
+    const inputNombre = usuarioARegistrar[0]
+    const inputContrasena = usuarioARegistrar[1]
+    const inputDireccion = usuarioARegistrar[2]
+    const inputCiudad = usuarioARegistrar[3]
+    const inputCodigoPostal = usuarioARegistrar[4]
+    const inputProvincia = usuarioARegistrar[5]
+    const inputTelefono = usuarioARegistrar[6]
 
     btn.addEventListener("click", function(e){
         e.preventDefault()
-        validacionRegistro(nombre,contrasena,direccion,ciudad,codigoPostal,provincia,telefono)
+        validacionRegistro(inputNombre, inputContrasena, inputDireccion, inputCiudad, inputCodigoPostal, inputProvincia, inputTelefono)
     })
 }
 
