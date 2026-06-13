@@ -76,26 +76,31 @@
                 <h3 class="h6 mb-4">Información Personal</h3>
                 <div class="mb-3">
                   <label class="form-label fw-bold">Nombre:</label>
-                  <p>Juan Pablo</p>
+                  <input class="form-control" type="text" name="nombre" id="nombre">
                 </div>
                 <div class="mb-3">
                   <label class="form-label fw-bold">Dirección:</label>
-                  <p>Calle Principal 123</p>
+                  <input class="form-control" type="text" name="direccion" id="direccion">
                 </div>
                 <div class="mb-3">
                   <label class="form-label fw-bold">Ciudad:</label>
-                  <p>Buenos Aires</p>
+                  <input class="form-control" type="text" name="ciudad" id="ciudad">
                 </div>
                 <div class="mb-3">
                   <label class="form-label fw-bold">Provincia:</label>
-                  <p>Buenos Aires</p>
+                  <input class="form-control" type="text" name="provincia" id="provincia">
                 </div>
                 <div class="mb-4">
                   <label class="form-label fw-bold">Teléfono:</label>
-                  <p>+54 9 11 2345-6789</p>
+                  <div class="input-group">
+                  <span class="p-2">+54 9</span>
+                  <input class="mb-2 form-control" type="tel" name="telefono" id="telefono">
                 </div>
                 <button id="cerrarSesion" class="btn btn-danger">
                   Cerrar Sesión
+                </button>
+                <button id="actualizar" class="btn btn-success">
+                  Actualizar Datos
                 </button>
               </div>
             </div>
@@ -109,6 +114,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="js/redireccion.js"></script>
-    <script src="js/cierreDeSesion.js"></script>
+    <script src="js/usuario.js"></script>
   </body>
 </html>
