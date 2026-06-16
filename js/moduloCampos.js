@@ -1,3 +1,4 @@
+import { getLocalStorage } from "./moduloLocalStorage.js"
 let usuarios = JSON.parse(localStorage.getItem("users"))
 export function validField(campo){
     campo.classList.remove("is-invalid")
@@ -76,9 +77,9 @@ export function validarTelefono(telefono){
     }
 }
 
-export function estaNombre(nombre){
+function estaNombre(nombre){
     for(const n in usuarios){
-        if(nombre === usuarios[n].name){
+        if(nombre === usuarios[n].name && !(nombre === getLocalStorage("usuarioActivo").name)){
             return false
         }
     }

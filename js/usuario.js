@@ -1,39 +1,49 @@
+import { getLocalStorage, setLocalStorage } from "./moduloLocalStorage.js"
+import { datosValidos } from "./moduloCampos.js"
 window.addEventListener("load", inicializar)
 
 function inicializar(){
     iniciarBotonCerrarSesion()
     const inputDatosUsuario = document.querySelectorAll(".form-control")
     const inputNombre = inputDatosUsuario[0]
-    const inputDireccion = inputDatosUsuario[1]
-    const inputCiudad = inputDatosUsuario[2]
-    const inputProvincia = inputDatosUsuario[3]
-    const inputTelefono = inputDatosUsuario[4]
-    const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"))
-    agregarDatos(inputNombre,inputDireccion,inputCiudad,inputProvincia,inputTelefono,usuarioActivo)
+    const inputContrasena = inputDatosUsuario[1]
+    const inputDireccion = inputDatosUsuario[2]
+    const inputCiudad = inputDatosUsuario[3]
+    const inputCodigoPostal = inputDatosUsuario[4]
+    const inputProvincia = inputDatosUsuario[5]
+    const inputTelefono = inputDatosUsuario[6]
+    const usuarioActivo = getLocalStorage("usuarioActivo")
+    agregarDatos(inputNombre,inputContrasena,inputDireccion,inputCiudad,inputCodigoPostal,inputProvincia,inputTelefono,usuarioActivo)
 
     const update = document.getElementById("actualizar")
     update.addEventListener("click", ()=>{
-        actualizarDatos(inputNombre, inputNombre.id, usuarioActivo)
-        actualizarDatos(inputDireccion, inputDireccion.id, usuarioActivo)
-        actualizarDatos(inputCiudad, inputCiudad.id, usuarioActivo)
-        actualizarDatos(inputProvincia, inputProvincia.id, usuarioActivo)
-        actualizarDatos(inputTelefono, inputTelefono.id, usuarioActivo)
+        if(datosValidos(inputNombre, inputContrasena, inputDireccion, inputCiudad, inputCodigoPostal, inputProvincia, inputTelefono)){
+            actualizarDatos(inputNombre, inputNombre.id, usuarioActivo)
+            actualizarDatos(inputContrasena, inputContrasena.id, usuarioActivo)
+            actualizarDatos(inputDireccion, inputDireccion.id, usuarioActivo)
+            actualizarDatos(inputCiudad, inputCiudad.id, usuarioActivo)
+            actualizarDatos(inputCodigoPostal, inputCodigoPostal.id, usuarioActivo)
+            actualizarDatos(inputProvincia, inputProvincia.id, usuarioActivo)
+            actualizarDatos(inputTelefono, inputTelefono.id, usuarioActivo)
+        }
     })
 
 
 
 }
 
-function agregarDatos(nombre, direccion, ciudad, provincia, telefono, usuario){
+function agregarDatos(nombre, contrasena, direccion, ciudad, codigoPostal, provincia, telefono, usuario){
     nombre.value = usuario.name
+    contrasena.value = usuario.password
     direccion.value = usuario.address
     ciudad.value = usuario.city
+    codigoPostal.value = usuario.code
     provincia.value = usuario.prov
     telefono.value = usuario.phone
 }
 
 function actualizarDatos(campo, campoID, usuarioActivo){
-    const usuarios = JSON.parse(localStorage.getItem("users"))
+    const usuarios = getLocalStorage("users")
     const nuevoValor = campo.value
     for(const i in usuarios){
         if(usuarios[i].name === usuarioActivo.name){
@@ -42,6 +52,10 @@ function actualizarDatos(campo, campoID, usuarioActivo){
                     usuarios[i].name = nuevoValor
                     usuarioActivo.name = nuevoValor
                     break;
+                case "contrasena":
+                    usuarios[i].password = nuevoValor
+                    usuarioActivo.password = nuevoValor
+                    break
                 case "direccion":
                     usuarios[i].address = nuevoValor
                     usuarioActivo.address = nuevoValor
@@ -49,6 +63,10 @@ function actualizarDatos(campo, campoID, usuarioActivo){
                 case "ciudad":
                     usuarios[i].city = nuevoValor
                     usuarioActivo.city = nuevoValor
+                    break;
+                case "codigoPostal":
+                    usuarios[i].code = nuevoValor
+                    usuarioActivo.code = nuevoValor
                     break;
                 case "provincia":
                     usuarios[i].prov = nuevoValor
@@ -61,8 +79,8 @@ function actualizarDatos(campo, campoID, usuarioActivo){
             }
         }
     }
-    localStorage.setItem("users",JSON.stringify(usuarios))
-    localStorage.setItem("usuarioActivo",JSON.stringify(usuarioActivo))
+    setLocalStorage("users", usuarios)
+    setLocalStorage("usuarioActivo", usuarioActivo)
 }
 
 function iniciarBotonCerrarSesion(){
