@@ -77,24 +77,52 @@
                 <div class="mb-3">
                   <label class="form-label fw-bold">Nombre:</label>
                   <input class="form-control" type="text" name="nombre" id="nombre">
+                  <div class="invalid-feedback" id="nombreError"></div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label fw-bold">Contraseña:</label>
+                  <input class="form-control" type="password" name="contrasena" id="contrasena">
+                  <div class="invalid-feedback">
+                    La contraseña debe contener 8 caracteres (al menos una mayúscula,
+                    una minúscula, un número y un símbolo)
+                  </div>
                 </div>
                 <div class="mb-3">
                   <label class="form-label fw-bold">Dirección:</label>
                   <input class="form-control" type="text" name="direccion" id="direccion">
+                  <div class="invalid-feedback">
+
+                  </div>
                 </div>
                 <div class="mb-3">
                   <label class="form-label fw-bold">Ciudad:</label>
                   <input class="form-control" type="text" name="ciudad" id="ciudad">
+                  <div class="invalid-feedback">
+                    
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label fw-bold">Codigo postal:</label>
+                  <input class="form-control" type="number" name="codigoPostal" id="codigoPostal">
+                  <div class="invalid-feedback">
+                    Ingrese un código postal válido.
+                  </div>
                 </div>
                 <div class="mb-3">
                   <label class="form-label fw-bold">Provincia:</label>
                   <input class="form-control" type="text" name="provincia" id="provincia">
+                  <div class="invalid-feedback">
+                    
+                  </div>
                 </div>
                 <div class="mb-4">
                   <label class="form-label fw-bold">Teléfono:</label>
                   <div class="input-group">
                   <span class="p-2">+54 9</span>
                   <input class="mb-2 form-control" type="tel" name="telefono" id="telefono">
+                  <div class="invalid-feedback">
+                    Ingrese un número de teléfono válido.
+                  </div>
                 </div>
                 <button id="cerrarSesion" class="btn btn-danger">
                   Cerrar Sesión
@@ -113,7 +141,8 @@
       integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
       crossorigin="anonymous"
     ></script>
+    <script src="https://unpkg.com/validator@latest/validator.min.js"></script>
     <script src="js/redireccion.js"></script>
-    <script src="js/usuario.js"></script>
+    <script type="module" src="js/usuario.js"></script>
   </body>
 </html>

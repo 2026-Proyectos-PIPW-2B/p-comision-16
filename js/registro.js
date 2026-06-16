@@ -1,18 +1,10 @@
 import { datosValidos } from "./moduloCampos.js"
-const Admin = {
-    name: "A",
-    password: "1",
-    profile: "administrador"
-}
-let usuarios = [Admin]
+import { startLocalStorage } from "./moduloLocalStorage.js"
+import { setLocalStorage } from "./moduloLocalStorage.js"
 window.addEventListener("load", iniciarRegistro)
+let usuarios = startLocalStorage()
 
 function iniciarRegistro(){
-    if(localStorage.getItem("users") === null){
-        localStorage.setItem("users", JSON.stringify(usuarios))
-    } else{
-        usuarios = JSON.parse(localStorage.getItem("users"))
-    }
     const btn = document.getElementById("btn-register")
     const usuarioARegistrar = document.querySelectorAll(".form-control")
     const inputNombre = usuarioARegistrar[0]
@@ -48,5 +40,5 @@ function crearUsuario(nombre,contrasena, direccion, ciudad, codigoPostal, provin
         profile: perfil
     }
     usuarios.push(usuario)
-    localStorage.setItem("users", JSON.stringify(usuarios))
+    setLocalStorage("users", usuarios)
 }
