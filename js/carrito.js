@@ -1,88 +1,89 @@
-import { setLocalStorage } from "./moduloLocalStorage.js"
 import { getLocalStorage } from "./moduloLocalStorage.js"
 
 window.addEventListener("load", iniciarCarrito)
 
 function iniciarCarrito(){
     const listaCarrito = document.getElementById("lista-carrito")
-
     const productos = getLocalStorage("products")
 
+    crearLista(listaCarrito,productos)
+
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const li = document.createElement("li")
-li.classList.add("list-group-item", "text-light", "d-flex", "align-items-center", "border-secondary", "lista-dark-purple")
-
-const div = document.createElement("div")
-div.classList.add("d-flex", "align-items-center")
-
-const img = new Image(50,50)
-img.src = "img/Pala.jpg"
-img.alt = "Pala"
-img.height = 50
-img.classList.add("me-3")
-const producto ={
-    nombre: "Pala",
-    imagen: img,
-    cantidad: 1,
-    precio: 20
+function crearLista(listaCarrito, productos){
+    for(const i in productos){
+        const li = crearElementoLista(productos[i])
+        listaCarrito.appendChild(li)
+    }
 }
 
-const h6 = document.createElement("h6")
-h6.classList.add("mb-0")
-h6.textContent = producto.nombre
+function crearElementoLista(producto){
+    const li = document.createElement("li")
+    li.classList.add("list-group-item", "text-light", "d-flex", "align-items-center", "border-secondary", "lista-dark-purple")
 
-div.appendChild(img)
-div.appendChild(h6)
+    const div = document.createElement("div")
+    div.classList.add("d-flex", "align-items-center")
 
-const divBoton = document.createElement("div")
-divBoton.classList.add("d-flex", "align-items-center", "gap-2", "ms-auto")
+    const h6 = document.createElement("h6")
+    h6.classList.add("mb-0")
+    h6.textContent = producto.nombre
 
-const spanCantidad = document.createElement("span")
-spanCantidad.classList.add("badge", "rounded-pill", "bg-secondary", "text-light", "px-3", "py-2")
-spanCantidad.textContent = producto.cantidad
+    const img = crearImagen(50, producto.imagen, producto.nombre)
 
-const btnMenos = document.createElement("button")
-const menos = document.createElement("i")
-btnMenos.classList.add("btn", "btn-sm", "btn-outline-light")
-menos.classList.add("bi", "bi-dash-lg")
-btnMenos.append(menos)
+    div.appendChild(img)
+    div.appendChild(h6)
+    
+    const divBoton = document.createElement("div")
+    divBoton.classList.add("d-flex", "align-items-center", "gap-2", "ms-auto")
 
+    const spanCantidad = document.createElement("span")
+    spanCantidad.classList.add("badge", "rounded-pill", "bg-secondary", "text-light", "px-3", "py-2")
+    spanCantidad.textContent = producto.cantidad
 
-const spanPrecio = document.createElement("span")
-spanPrecio.classList.add("badge", "bg-secondary", "rounded-pill", "ms-4")
-spanPrecio.textContent = `$${producto.precio}`
+    const btnMenos = crearBoton("-",spanCantidad)
+    const btnMas = crearBoton("+",spanCantidad)
 
-const btnMas = document.createElement("button")
-const mas = document.createElement("i")
-btnMas.classList.add("btn", "btn-sm", "btn-outline-light")
-mas.classList.add("bi", "bi-plus-lg")
-btnMas.append(mas)
+    const spanPrecio = document.createElement("span")
+    spanPrecio.classList.add("badge", "bg-secondary", "rounded-pill", "ms-4")
+    calcularPrecio(spanPrecio, producto.cantidad, producto.precio)
 
+    divBoton.appendChild(btnMenos)
+    divBoton.appendChild(spanCantidad)
+    divBoton.appendChild(btnMas)
+    divBoton.appendChild(spanPrecio)
 
-divBoton.appendChild(btnMenos)
-divBoton.appendChild(spanCantidad)
-divBoton.appendChild(btnMas)
-divBoton.appendChild(spanPrecio)
+    li.appendChild(div)
+    li.appendChild(divBoton)
 
-li.appendChild(div)
-li.appendChild(divBoton)
+    return li
+}
+
+function crearBoton(tipo, spanCantidad){
+    const btn = document.createElement("button")
+    btn.classList.add("btn", "btn-sm", "btn-outline-light")
+    const icono = document.createElement("i")
+    switch(tipo){
+        case "-":
+            icono.classList.add("bi", "bi-dash-lg")
+            btn.addEventListener("click", ()=>{
+                restar(spanCantidad)
+            })
+            break
+        case "+":
+            icono.classList.add("bi", "bi-plus-lg")
+            btn.addEventListener("click", ()=>{
+                sumar(spanCantidad)
+            })
+            break
+    }
+    btn.appendChild(icono)
+    return btn
+}
+
+function calcularPrecio(precioTotal,cantidad,precio){
+    precioTotal.textContent = `$${cantidad*precio}`
+}
 
 function restar(cantidad){
     cantidad.textContent = Number(cantidad.textContent)-1
@@ -92,4 +93,10 @@ function sumar(cantidad){
     cantidad.textContent = Number(cantidad.textContent)+1
 }
 
-listaCarrito.appendChild(li)
+function crearImagen(tamaño, source, alt){
+    const img = new Image(tamaño,tamaño)
+    img.src = source
+    img.alt = alt
+    img.classList.add("me-3")
+    return img
+}
