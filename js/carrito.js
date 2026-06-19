@@ -1,13 +1,10 @@
-import { getLocalStorage, setLocalStorage } from "./moduloLocalStorage.js"
-import { crearImagen } from "./moduloLocalStorage.js"
-import { startLocalStorageProductos } from "./moduloLocalStorage.js"
+import { getLocalStorage, setLocalStorage, crearImagen, startCarrito } from "./moduloLocalStorage.js"
 window.addEventListener("load", iniciarCarrito)
-productos = startLocalStorageProductos()
 
 function iniciarCarrito(){
     const listaCarrito = document.getElementById("lista-carrito")
     listaCarrito.textContent = ""
-    const productos = getLocalStorage("products")
+    const productos = getLocalStorage("carrito")
 
     crearLista(listaCarrito,productos)
 
@@ -99,7 +96,7 @@ function sumar(producto){
 }
 
 function actualizarProducto(producto){
-    let productos = getLocalStorage("products")
+    let productos = getLocalStorage("carrito")
     for(const i in productos){
         if(productos[i].nombre === producto.nombre){
             if(producto.cantidad === 0){
@@ -110,9 +107,9 @@ function actualizarProducto(producto){
         }
     }
     if(productos.length === 0){
-        localStorage.removeItem("products")
+        localStorage.removeItem("carrito")
     } else{
-        setLocalStorage("products", productos)
+        setLocalStorage("carrito", productos)
     }
     iniciarCarrito()
 }

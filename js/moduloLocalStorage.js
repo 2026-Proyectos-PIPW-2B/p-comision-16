@@ -20,6 +20,11 @@ for(const i in nombreProductos){
     productos.push(producto)
 }
 
+if(getLocalStorage("carrito") === null){
+    let carrito = []
+    setLocalStorage("carrito", carrito)
+}
+
 export function crearImagen(producto, tamañoX, tamañoY, clases){
     const img = new Image(tamañoX,tamañoY)
     img.src = producto.imagen
@@ -51,5 +56,12 @@ export function startLocalStorageProductos(){
         setLocalStorage("products", productos)
     } else{
         return getLocalStorage("products")
+    }
+}
+
+export function startCarrito(){
+    if(getLocalStorage("carrito") === null){
+        const carrito = []
+        setLocalStorage("carrito", carrito)
     }
 }
