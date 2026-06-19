@@ -15,11 +15,20 @@ for(const i in nombreProductos){
         nombre: nombreProductos[i],
         imagen: imagenes[i],
         precio: precios[i],
-        cantidad: 1
+        cantidad: 1,
     }
     productos.push(producto)
 }
 
+export function crearImagen(producto, tamañoX, tamañoY, clases){
+    const img = new Image(tamañoX,tamañoY)
+    img.src = producto.imagen
+    img.alt = producto.nombre
+    for(const i in clases){
+        img.classList.add(clases[i])
+    }
+    return img
+}
 
 export function setLocalStorage(item, elementos){
     localStorage.setItem(item,JSON.stringify(elementos))
@@ -37,5 +46,10 @@ export function startLocalStorage(){
     }
 }
 
-
-setLocalStorage("products", productos)
+export function startLocalStorageProductos(){
+    if(getLocalStorage("products") === null){
+        setLocalStorage("products", productos)
+    } else{
+        return getLocalStorage("products")
+    }
+}

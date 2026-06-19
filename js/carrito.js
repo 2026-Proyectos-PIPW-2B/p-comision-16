@@ -1,9 +1,12 @@
-import { getLocalStorage } from "./moduloLocalStorage.js"
-
+import { getLocalStorage, setLocalStorage } from "./moduloLocalStorage.js"
+import { crearImagen } from "./moduloLocalStorage.js"
+import { startLocalStorageProductos } from "./moduloLocalStorage.js"
 window.addEventListener("load", iniciarCarrito)
+productos = startLocalStorageProductos()
 
 function iniciarCarrito(){
     const listaCarrito = document.getElementById("lista-carrito")
+    listaCarrito.textContent = ""
     const productos = getLocalStorage("products")
 
     crearLista(listaCarrito,productos)
@@ -29,7 +32,7 @@ function crearElementoLista(producto){
     h6.classList.add("mb-0")
     h6.textContent = producto.nombre
 
-    const img = crearImagen(50, producto.imagen, producto.nombre)
+    const img = crearImagen(producto,50,50,["me-3"])
 
     div.appendChild(img)
     div.appendChild(h6)
@@ -41,8 +44,8 @@ function crearElementoLista(producto){
     spanCantidad.classList.add("badge", "rounded-pill", "bg-secondary", "text-light", "px-3", "py-2")
     spanCantidad.textContent = producto.cantidad
 
-    const btnMenos = crearBoton("-",spanCantidad)
-    const btnMas = crearBoton("+",spanCantidad)
+    const btnMenos = crearBoton("-",producto)
+    const btnMas = crearBoton("+",producto)
 
     const spanPrecio = document.createElement("span")
     spanPrecio.classList.add("badge", "bg-secondary", "rounded-pill", "ms-4")
@@ -59,7 +62,7 @@ function crearElementoLista(producto){
     return li
 }
 
-function crearBoton(tipo, spanCantidad){
+function crearBoton(tipo, producto){
     const btn = document.createElement("button")
     btn.classList.add("btn", "btn-sm", "btn-outline-light")
     const icono = document.createElement("i")
@@ -67,13 +70,13 @@ function crearBoton(tipo, spanCantidad){
         case "-":
             icono.classList.add("bi", "bi-dash-lg")
             btn.addEventListener("click", ()=>{
-                restar(spanCantidad)
+                restar(producto)
             })
             break
         case "+":
             icono.classList.add("bi", "bi-plus-lg")
             btn.addEventListener("click", ()=>{
-                sumar(spanCantidad)
+                sumar(producto)
             })
             break
     }
@@ -85,18 +88,31 @@ function calcularPrecio(precioTotal,cantidad,precio){
     precioTotal.textContent = `$${cantidad*precio}`
 }
 
-function restar(cantidad){
-    cantidad.textContent = Number(cantidad.textContent)-1
+function restar(producto){
+    producto.cantidad -= 1
+    actualizarProducto(producto)
 }
 
-function sumar(cantidad){
-    cantidad.textContent = Number(cantidad.textContent)+1
+function sumar(producto){
+    producto.cantidad += 1
+    actualizarProducto(producto)
 }
 
-function crearImagen(tamaño, source, alt){
-    const img = new Image(tamaño,tamaño)
-    img.src = source
-    img.alt = alt
-    img.classList.add("me-3")
-    return img
+function actualizarProducto(producto){
+    let productos = getLocalStorage("products")
+    for(const i in productos){
+        if(productos[i].nombre === producto.nombre){
+            if(producto.cantidad === 0){
+                productos.splice(i,1)
+            } else{
+            productos[i] = producto
+            }
+        }
+    }
+    if(productos.length === 0){
+        localStorage.removeItem("products")
+    } else{
+        setLocalStorage("products", productos)
+    }
+    iniciarCarrito()
 }
