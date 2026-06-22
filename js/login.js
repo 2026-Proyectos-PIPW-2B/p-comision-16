@@ -36,6 +36,7 @@ function validarUsuario(nombre,contrasena){
     const user = validarContrasena(validarNombre(nombre), contrasena)
     if(user != null){
         setLocalStorage("usuarioActivo", user)
+        setLocalStorage("historial", getLocalStorage("usuarioActivo").historial)
         setTimeout(() => {
             if(user.profile === "usuario_final")
                 location.href = "catalogo.html"
