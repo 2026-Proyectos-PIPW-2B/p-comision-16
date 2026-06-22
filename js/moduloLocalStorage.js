@@ -67,6 +67,15 @@ export function startCarrito(){
 }
 
 export function setHistorial(){
-    const usuarios = getLocalStorage("usuarios")
+    const usuarios = getLocalStorage("users")
     const usuarioActivo = getLocalStorage("usuarioActivo")
+    const historial = getLocalStorage("historial")
+    usuarioActivo.historial = historial
+    for(const i in usuarios){
+        if(usuarios[i].nombre === usuarioActivo.nombre){
+            usuarios[i] = usuarioActivo
+        }
+    }
+    setLocalStorage("usuarioActivo", usuarioActivo)
+    setLocalStorage("users", usuarios)
 }
