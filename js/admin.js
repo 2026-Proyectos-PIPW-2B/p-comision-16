@@ -1,3 +1,5 @@
+import { getLocalStorage, setLocalStorage } from "./moduloLocalStorage.js"
+
 window.addEventListener("load", ()=>{
     const adminSelect = document.getElementById("adminSelect")
     const tablaUsuarios = document.getElementById("admin-usuarios")
@@ -10,11 +12,11 @@ window.addEventListener("load", ()=>{
     })
 
     timer.addEventListener("change", ()=>{
-        localStorage.setItem("timer", timer.value*60)
-        localStorage.setItem("time", 0)
+        setLocalStorage("timer", timer.value*60)
+        setLocalStorage("time", 0)
     })
 
-    if(JSON.parse(localStorage.getItem("usuarioActivo")).profile != "administrador"){
+    if(getLocalStorage("usuarioActivo").profile != "administrador"){
         window.alert("Esta vista es exclusiva para administradores")
         location.href = "catalogo.html"
     }

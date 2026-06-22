@@ -1,7 +1,9 @@
+import { getLocalStorage, setLocalStorage } from "./moduloLocalStorage.js"
+
 window.addEventListener("load", redirigir)
 function redirigir(){
-    if(localStorage.getItem("timer") === null){
-        localStorage.setItem("timer", 600)
+    if(getLocalStorage("timer") === null){
+        setLocalStorage("timer", 600)
     }
     const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"))
     if(usuarioActivo === null){
@@ -11,14 +13,14 @@ function redirigir(){
 }
 
 setInterval(() => {
-    if(localStorage.getItem("time") === null){
-        localStorage.setItem("time", 0)
+    if(getLocalStorage("time") === null){
+        setLocalStorage("time", 0)
     } else{
-        localStorage.setItem("time", Number(localStorage.getItem("time"))+1)
+        setLocalStorage("time", Number(localStorage.getItem("time"))+1)
     }
 
-    if(localStorage.getItem("time") == localStorage.getItem("timer")){
-        localStorage.setItem("time", 0)
+    if(getLocalStorage("time") == getLocalStorage("timer")){
+        setLocalStorage("time", 0)
         localStorage.removeItem("usuarioActivo")
         redirigir()
     }

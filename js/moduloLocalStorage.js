@@ -65,3 +65,8 @@ export function startCarrito(){
         setLocalStorage("carrito", carrito)
     }
 }
+
+export function setHistorial(){
+    const usuarios = getLocalStorage("usuarios")
+    const usuarioActivo = getLocalStorage("usuarioActivo")
+}

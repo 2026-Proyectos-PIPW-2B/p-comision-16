@@ -149,4 +149,5 @@ function addHistorial(carrito){
     }
     historial.push(productoHistorial)
     setLocalStorage("historial",historial)
+    
 }

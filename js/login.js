@@ -1,5 +1,6 @@
 import { validField } from "./moduloCampos.js"
 import { invalidField } from "./moduloCampos.js"
+import { getLocalStorage, setLocalStorage } from "./moduloLocalStorage.js"
 const Admin = {
     name: "A",
     password: "1",
@@ -9,18 +10,18 @@ let usuarios = [Admin]
 window.addEventListener("load", iniciar)
 
 function iniciar(){
-    if(localStorage.getItem("usuarioActivo") != null){
-        const usuarioActivo = JSON.parse(localStorage.getItem("usuarioActivo"))
+    if(getLocalStorage("usuarioActivo") != null){
+        const usuarioActivo = getLocalStorage("usuarioActivo")
         if (usuarioActivo.profile === "administrador"){
             location.href = "administracion.html"
         } else{
             location.href = "catalogo.href"
         }
     }
-    if(localStorage.getItem("users") === null){
-        localStorage.setItem("users", JSON.stringify(usuarios))
+    if(getLocalStorage("users") === null){
+        setLocalStorage("users", usuarios)
     } else{
-        usuarios = JSON.parse(localStorage.getItem("users"))
+        usuarios = getLocalStorage("users")
     }
     const inputNombre = document.getElementById("usuario")
     const inputContrasena = document.getElementById("contrasena")
@@ -34,7 +35,7 @@ function iniciar(){
 function validarUsuario(nombre,contrasena){
     const user = validarContrasena(validarNombre(nombre), contrasena)
     if(user != null){
-        localStorage.setItem("usuarioActivo", JSON.stringify(user))
+        setLocalStorage("usuarioActivo", user)
         setTimeout(() => {
             if(user.profile === "usuario_final")
                 location.href = "catalogo.html"
