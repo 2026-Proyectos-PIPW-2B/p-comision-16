@@ -5,10 +5,13 @@ function iniciarCarrito(){
     const listaCarrito = document.getElementById("lista-carrito")
     listaCarrito.textContent = ""
     const productos = getLocalStorage("carrito")
+    const carritoTotal = document.getElementById("carrito-total")
+
+    const BtnConfirmarCompra = document.getElementById("carrito-confirmar")
+    BtnConfirmarCompra.addEventListener("click", confirmarCompra)
 
     crearLista(listaCarrito,productos)
-
-
+    carritoTotal.textContent = `Total: $${calcularTotal(productos)}`
 }
 
 function crearLista(listaCarrito, productos){
@@ -112,4 +115,38 @@ function actualizarProducto(producto){
         setLocalStorage("carrito", productos)
     }
     iniciarCarrito()
+}
+
+function calcularTotal(productos){
+    let precioFinal = 0
+    for(const i in productos){
+        precioFinal += productos[i].precio*productos[i].cantidad
+    }
+    return precioFinal
+}
+
+function confirmarCompra(){
+    if(getLocalStorage("carrito").length > 0){
+        addHistorial(getLocalStorage("carrito"))
+        window.alert("Se ha realizado la compra con éxito")
+        setLocalStorage("carrito",[])
+        iniciarCarrito()
+    }
+}
+
+function addHistorial(carrito){
+    let historial
+    if(getLocalStorage("historial") === null){
+        historial = []
+    } else{
+        historial = getLocalStorage("historial")
+    }
+    const fecha = new Date()
+        const productoHistorial = {
+            fecha: `${fecha.getFullYear()}-${fecha.getMonth()+1}-${fecha.getDate()}`,
+            precio: calcularTotal(carrito),
+            productos: carrito
+    }
+    historial.push(productoHistorial)
+    setLocalStorage("historial",historial)
 }
