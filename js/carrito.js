@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage, crearImagen, startCarrito, setHistorial } from "./moduloLocalStorage.js"
+import { getLocalStorage, setLocalStorage, crearImagen, setHistorial } from "./moduloLocalStorage.js"
 window.addEventListener("load", iniciarCarrito)
 
 function iniciarCarrito(){

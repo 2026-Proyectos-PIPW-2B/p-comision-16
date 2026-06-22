@@ -88,6 +88,8 @@ function iniciarBotonCerrarSesion(){
     btn.addEventListener("click", function(e){
         e.preventDefault()
         localStorage.removeItem("usuarioActivo")
+        localStorage.removeItem("carrito")
+        localStorage.removeItem("historial")
         location.href = "login.html"
     })
 }
