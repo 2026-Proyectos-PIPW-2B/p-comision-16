@@ -148,6 +148,29 @@
           </div>
         </div>
       </section>
+      <div class="modal fade" id="modalProductos" tabindex="-1" aria-labelledby="modalProductos" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen-sm-down modal-lg">
+          <div class="modal-content bg-secondary">
+            <div class="modal-header">
+              <h1 class="modal-title fs-4 text-light" id="modalProductos">Productos del usuario</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table table-dark table-striped">
+                <thead>
+                  <tr>
+                    <th>Producto</th>
+                    <th>Cantidad comprada</th>
+                    <th>Precio total</th>
+                  </tr>
+                </thead>
+                <tbody id="listaProductos"></tbody>
+              </table>
+            </div>
+            <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button></div>
+          </div>
+        </div>
+      </div>
     </main>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
