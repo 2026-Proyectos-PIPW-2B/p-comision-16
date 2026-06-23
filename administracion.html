@@ -71,7 +71,7 @@
         <h2 class="h5 mb-3">Administración</h2>
         <div class="mb-2">
           <label for="timer">Duración de sesión</label>
-          <input type="number" name="timer" id="timer">
+          <input type="number" name="timer" id="timer" />
           <label for="timer">minutos.</label>
         </div>
         <select name="" id="adminSelect" class="bg-dark text-light mb-3">
@@ -95,17 +95,10 @@
                         <th>Ciudad</th>
                         <th>Provincia</th>
                         <th>Teléfono</th>
+                        <th>Acciones</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                        <td>Juan Pablo</td>
-                        <td>Calle Principal 123</td>
-                        <td>Buenos Aires</td>
-                        <td>Buenos Aires</td>
-                        <td>+54 9 11 2345-6789</td>
-                      </tr>
-                    </tbody>
+                    <tbody id="usuarios-tbody"></tbody>
                   </table>
                 </div>
               </div>
@@ -186,5 +179,6 @@
     ></script>
     <script type="module" src="js/redireccion.js"></script>
     <script type="module" src="js/admin.js"></script>
+    <script type="module" src="js/adminUsuarios.js"></script>
   </body>
 </html>
