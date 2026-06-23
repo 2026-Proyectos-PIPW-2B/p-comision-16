@@ -1,5 +1,5 @@
 import { getLocalStorage } from "./moduloLocalStorage.js"
-let usuarios = JSON.parse(localStorage.getItem("users"))
+let usuarios = getLocalStorage("users")
 export function validField(campo){
     campo.classList.remove("is-invalid")
     campo.classList.add("is-valid")
