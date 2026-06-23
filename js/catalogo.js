@@ -1,8 +1,9 @@
-import { crearImagen, getLocalStorage, setLocalStorage, startCarrito } from "./moduloLocalStorage.js"
+import { crearImagen, getLocalStorage, setLocalStorage, startCarrito, startLocalStorageProductos } from "./moduloLocalStorage.js"
 window.addEventListener("load", iniciarCatalogo)
 
 function iniciarCatalogo(){
     startCarrito()
+    startLocalStorageProductos()
     const productos = getLocalStorage("products")
     const grid = document.getElementById("productos-grid")
 
