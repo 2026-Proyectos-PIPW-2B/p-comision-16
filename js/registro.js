@@ -1,8 +1,7 @@
 import { datosValidos } from "./moduloCampos.js"
-import { startLocalStorage } from "./moduloLocalStorage.js"
+import { getLocalStorage } from "./moduloLocalStorage.js"
 import { setLocalStorage } from "./moduloLocalStorage.js"
 window.addEventListener("load", iniciarRegistro)
-let usuarios = startLocalStorage()
 
 function iniciarRegistro(){
     const btn = document.getElementById("btn-register")
@@ -29,6 +28,7 @@ function validacionRegistro(nombre, contrasena, direccion, ciudad, codigoPostal,
 }
 
 function crearUsuario(nombre,contrasena, direccion, ciudad, codigoPostal, provincia, telefono, perfil = "usuario_final"){
+    const usuarios = getLocalStorage("users")
     const usuario ={
         name: nombre,
         password: contrasena,
