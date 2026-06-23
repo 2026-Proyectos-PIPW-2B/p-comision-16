@@ -72,7 +72,7 @@ export function setHistorial(){
     const historial = getLocalStorage("historial")
     usuarioActivo.historial = historial
     for(const i in usuarios){
-        if(usuarios[i].nombre === usuarioActivo.nombre){
+        if(usuarios[i].name === usuarioActivo.name){
             usuarios[i] = usuarioActivo
         }
     }

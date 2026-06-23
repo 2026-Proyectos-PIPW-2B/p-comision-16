@@ -101,7 +101,6 @@
 
           <div id="lista-productos" class="col-12">
             <div class="row g-4 justify-content-center" id="productos-grid">
-          
             </div>
           </div>
         </div>
@@ -114,5 +113,52 @@
     ></script>
     <script type="module" src="js/redireccion.js"></script>
     <script type="module" src="js/catalogo.js"></script>
+
+    <!-- modal -->
+    <div
+      class="modal fade"
+      id="modalProductoAgregado"
+      tabindex="-1"
+      aria-labelledby="modalProductoAgregadoLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark text-light border-secondary">
+          <div class="modal-header border-secondary">
+            <h5 class="modal-title" id="modalProductoAgregadoLabel">
+              Producto Agregado al Carrito
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="card bg-secondary text-light border-secondary">
+              <div class="card-body overflow-auto" id="listaCatalogo">
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer border-secondary">
+            <button
+              type="button"
+              class="btn btn-outline-light"
+              data-bs-dismiss="modal"
+            >
+              Seguir comprando
+            </button>
+            <a
+              href="Carrito.html"
+              type="button"
+              class="btn btn-light text-dark"
+            >
+              Ir a mi carrito
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
