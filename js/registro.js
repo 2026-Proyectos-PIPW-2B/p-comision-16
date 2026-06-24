@@ -30,10 +30,10 @@ function validacionRegistro(usuario, nombre, apellido, contrasena, direccion, ci
     }
 }
 
-function crearUsuario(usuario, nombre, apellido, contrasena, direccion, ciudad, codigoPostal, provincia, telefono, perfil = "usuario_final"){
+function crearUsuario(username, nombre, apellido, contrasena, direccion, ciudad, codigoPostal, provincia, telefono, perfil = "usuario_final"){
     const usuarios = getLocalStorage("users")
     const usuario ={
-        username: usuario,
+        username: username,
         nombre: nombre,
         apellido: apellido,
         password: contrasena,
