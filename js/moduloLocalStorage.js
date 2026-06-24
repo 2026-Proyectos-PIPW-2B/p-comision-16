@@ -22,7 +22,7 @@ export function getLocalStorage(item){
 }
 
 export function startLocalStorage(){
-    if(getLocalStorage("users") === null || getLocalStorage("users").value === undefined){
+    if(getLocalStorage("users") === null){
         setLocalStorage("users", usuariosPorDefecto())
     } else{
         return getLocalStorage("users")
@@ -30,7 +30,7 @@ export function startLocalStorage(){
 }
 
 export function startLocalStorageProductos(){
-    if(getLocalStorage("products") === null || getLocalStorage("products").value === undefined){
+    if(getLocalStorage("products") === null){
         setLocalStorage("products", productosPorDefecto())
     } else{
         return getLocalStorage("products")
@@ -77,6 +77,7 @@ function productosPorDefecto(){
             imagen: imagenes[i],
             precio: precios[i],
             cantidad: 1,
+            existe: true,
         }
         productos.push(producto)
     }
@@ -99,4 +100,25 @@ function usuariosPorDefecto(){
     }
     usuarios.push(Admin)
     return usuarios
+}
+
+export function sumarCompra(compra, usuario){
+    if(getLocalStorage("ventas") === null){
+        const ventas = [{
+            venta: compra,
+            usuarioAsociado: usuario,
+            id: 1
+        }]
+        setLocalStorage("ventas", ventas)
+        return ventas[0].id
+    } else{
+        const ventas = getLocalStorage("ventas")
+        const venta = {
+            venta: compra,
+            id: ventas.length+1,
+        }
+        ventas.push(venta)
+        setLocalStorage("ventas", ventas)
+        return venta.id
+    }
 }

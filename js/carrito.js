@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage, crearImagen, setHistorial } from "./moduloLocalStorage.js"
+import { getLocalStorage, setLocalStorage, crearImagen, setHistorial, sumarCompra } from "./moduloLocalStorage.js"
 window.addEventListener("load", iniciarCarrito)
 
 function iniciarCarrito(){
@@ -145,8 +145,9 @@ function addHistorial(carrito){
         const productoHistorial = {
             fecha: `${fecha.getFullYear()}-${fecha.getMonth()+1}-${fecha.getDate()}`,
             precio: calcularTotal(carrito),
-            productos: carrito
-    }
+            productos: carrito,
+        }
+        productoHistorial.idCompra = sumarCompra(productoHistorial, getLocalStorage("usuarioActivo"))
     historial.push(productoHistorial)
     setLocalStorage("historial",historial)
     setHistorial()
