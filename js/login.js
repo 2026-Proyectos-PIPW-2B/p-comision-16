@@ -29,6 +29,7 @@ function validarUsuario(nombre,contrasena){
         if(getLocalStorage("usuarioActivo").historial !== undefined){
             setLocalStorage("historial", getLocalStorage("usuarioActivo").historial)
         }
+        setLocalStorage("time", 0)
         setTimeout(() => {
             if(user.profile === "usuario_final")
                 location.href = "catalogo.html"

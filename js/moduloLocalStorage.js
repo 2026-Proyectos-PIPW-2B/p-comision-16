@@ -22,7 +22,7 @@ export function getLocalStorage(item){
 }
 
 export function startLocalStorage(){
-    if(getLocalStorage("users") === null){
+    if(getLocalStorage("users") === null || getLocalStorage("users").value === undefined){
         setLocalStorage("users", usuariosPorDefecto())
     } else{
         return getLocalStorage("users")
