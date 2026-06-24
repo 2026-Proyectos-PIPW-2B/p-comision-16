@@ -7,31 +7,35 @@ function iniciarRegistro(){
     startLocalStorage()
     const btn = document.getElementById("btn-register")
     const usuarioARegistrar = document.querySelectorAll(".form-control")
-    const inputNombre = usuarioARegistrar[0]
-    const inputContrasena = usuarioARegistrar[1]
-    const inputDireccion = usuarioARegistrar[2]
-    const inputCiudad = usuarioARegistrar[3]
-    const inputCodigoPostal = usuarioARegistrar[4]
-    const inputProvincia = usuarioARegistrar[5]
-    const inputTelefono = usuarioARegistrar[6]
+    const inputUsername = usuarioARegistrar[0]
+    const inputNombre = usuarioARegistrar [1]
+    const inputApellido = usuarioARegistrar[2]
+    const inputContrasena = usuarioARegistrar[3]
+    const inputDireccion = usuarioARegistrar[4]
+    const inputCiudad = usuarioARegistrar[5]
+    const inputCodigoPostal = usuarioARegistrar[6]
+    const inputProvincia = usuarioARegistrar[7]
+    const inputTelefono = usuarioARegistrar[8]
 
     btn.addEventListener("click", function(e){
         e.preventDefault()
-        validacionRegistro(inputNombre, inputContrasena, inputDireccion, inputCiudad, inputCodigoPostal, inputProvincia, inputTelefono)
+        validacionRegistro(inputUsername, inputNombre, inputApellido, inputContrasena, inputDireccion, inputCiudad, inputCodigoPostal, inputProvincia, inputTelefono)
     })
 }
 
-function validacionRegistro(nombre, contrasena, direccion, ciudad, codigoPostal, provincia, telefono){
-    if(datosValidos(nombre, contrasena, direccion, ciudad, codigoPostal, provincia, telefono)){
-        crearUsuario(nombre.value, contrasena.value, direccion.value, ciudad.value, codigoPostal.value, provincia.value, telefono.value)
+function validacionRegistro(usuario, nombre, apellido, contrasena, direccion, ciudad, codigoPostal, provincia, telefono){
+    if(datosValidos(usuario, contrasena, direccion, ciudad, codigoPostal, provincia, telefono)){
+        crearUsuario(usuario.value, nombre.value, apellido.value, contrasena.value, direccion.value, ciudad.value, codigoPostal.value, provincia.value, telefono.value)
         window.alert("Usuario registrado exitosamente")
     }
 }
 
-function crearUsuario(nombre,contrasena, direccion, ciudad, codigoPostal, provincia, telefono, perfil = "usuario_final"){
+function crearUsuario(usuario, nombre, apellido, contrasena, direccion, ciudad, codigoPostal, provincia, telefono, perfil = "usuario_final"){
     const usuarios = getLocalStorage("users")
     const usuario ={
-        name: nombre,
+        username: usuario,
+        nombre: nombre,
+        apellido: apellido,
         password: contrasena,
         address: direccion,
         city: ciudad,

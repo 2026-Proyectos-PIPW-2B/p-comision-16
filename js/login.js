@@ -45,7 +45,7 @@ function validarNombre(nombre){
     }
     for(let i=0;i<usuarios.length;i++){
         const user = usuarios[i]
-        if(nombre.value === user.name){
+        if(nombre.value === user.username){
             validField(nombre)
             return user
         } else{

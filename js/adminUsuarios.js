@@ -20,7 +20,7 @@ function renderizarUsuarios() {
 
   usuarios.forEach((u, indice) => {
     const tr = document.createElement("tr");
-    const nombre = u.name || "";
+    const nombre = u.username || "";
     const dirección = u.address || u.direccion || "";
     const ciudad = u.city || "";
     const provincia = u.prov || u.provincia || "";
@@ -55,7 +55,7 @@ function eliminarUsuario(indice) {
   usuarios.splice(indice, 1);
   setLocalStorage("users", usuarios);
   renderizarUsuarios();
-  if(usuario.name === getLocalStorage("usuarioActivo").name){
+  if(usuario.username === getLocalStorage("usuarioActivo").name){
     cerrarSesion()
   }
 }

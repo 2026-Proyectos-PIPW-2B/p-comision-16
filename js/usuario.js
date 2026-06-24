@@ -33,7 +33,7 @@ function inicializar(){
 }
 
 function agregarDatos(nombre, contrasena, direccion, ciudad, codigoPostal, provincia, telefono, usuario){
-    nombre.value = usuario.name
+    nombre.value = usuario.username
     contrasena.value = usuario.password
     direccion.value = usuario.address
     ciudad.value = usuario.city
@@ -46,11 +46,11 @@ function actualizarDatos(campo, campoID, usuarioActivo){
     const usuarios = getLocalStorage("users")
     const nuevoValor = campo.value
     for(const i in usuarios){
-        if(usuarios[i].name === usuarioActivo.name){
+        if(usuarios[i].username === usuarioActivo.username){
             switch (campoID) {
                 case "nombre":
-                    usuarios[i].name = nuevoValor
-                    usuarioActivo.name = nuevoValor
+                    usuarios[i].username = nuevoValor
+                    usuarioActivo.username = nuevoValor
                     break;
                 case "contrasena":
                     usuarios[i].password = nuevoValor

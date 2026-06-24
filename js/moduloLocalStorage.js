@@ -22,7 +22,7 @@ export function getLocalStorage(item){
 }
 
 export function startLocalStorage(){
-    if(getLocalStorage("users") === null || getLocalStorage("users").value === undefined){
+    if(getLocalStorage("users") === null){
         setLocalStorage("users", usuariosPorDefecto())
     } else{
         return getLocalStorage("users")
@@ -50,7 +50,7 @@ export function setHistorial(){
     const historial = getLocalStorage("historial")
     usuarioActivo.historial = historial
     for(const i in usuarios){
-        if(usuarios[i].name === usuarioActivo.name){
+        if(usuarios[i].username === usuarioActivo.username){
             usuarios[i] = usuarioActivo
         }
     }
@@ -86,7 +86,9 @@ function productosPorDefecto(){
 function usuariosPorDefecto(){
     const usuarios = []
     const Admin = {
-        name: "Admin1",
+        username: "Admin1",
+        nombre: "nombreAdmin",
+        apellido: "apellidoAdmin",
         password: "1234gG**",
         address: "Calle123",
         city: "Buenos Aires",
