@@ -22,7 +22,7 @@ export function getLocalStorage(item){
 }
 
 export function startLocalStorage(){
-    if(getLocalStorage("users") === null){
+    if(getLocalStorage("users") === null || getLocalStorage("users").value === undefined){
         setLocalStorage("users", usuariosPorDefecto())
     } else{
         return getLocalStorage("users")
@@ -30,7 +30,7 @@ export function startLocalStorage(){
 }
 
 export function startLocalStorageProductos(){
-    if(getLocalStorage("products") === null){
+    if(getLocalStorage("products") === null || getLocalStorage("products").value === undefined){
         setLocalStorage("products", productosPorDefecto())
     } else{
         return getLocalStorage("products")
@@ -56,6 +56,13 @@ export function setHistorial(){
     }
     setLocalStorage("usuarioActivo", usuarioActivo)
     setLocalStorage("users", usuarios)
+}
+
+export function cerrarSesion(){
+    localStorage.removeItem("usuarioActivo")
+    localStorage.removeItem("carrito")
+    localStorage.removeItem("historial")
+    location.href = "login.html"
 }
 
 function productosPorDefecto(){

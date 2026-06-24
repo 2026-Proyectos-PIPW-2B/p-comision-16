@@ -1,4 +1,5 @@
 import {
+  cerrarSesion,
   getLocalStorage,
   setLocalStorage,
   startLocalStorage,
@@ -17,7 +18,7 @@ function renderizarUsuarios() {
   if (!tbody) return;
   tbody.innerHTML = "";
 
-  usuarios.forEach((u, índice) => {
+  usuarios.forEach((u, indice) => {
     const tr = document.createElement("tr");
     const nombre = u.name || "";
     const dirección = u.address || u.direccion || "";
@@ -32,7 +33,7 @@ function renderizarUsuarios() {
             <td>${provincia}</td>
             <td>${teléfono}</td>
             <td>
-                <button class="btn btn-sm btn-danger btn-delete-user" data-idx="${índice}">Eliminar</button>
+                <button class="btn btn-sm btn-danger btn-delete-user" data-idx="${indice}">Eliminar</button>
             </td>
         `;
     tbody.appendChild(tr);
@@ -54,4 +55,7 @@ function eliminarUsuario(indice) {
   usuarios.splice(indice, 1);
   setLocalStorage("users", usuarios);
   renderizarUsuarios();
+  if(usuario.name === getLocalStorage("usuarioActivo").name){
+    cerrarSesion()
+  }
 }

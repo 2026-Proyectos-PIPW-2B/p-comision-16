@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage } from "./moduloLocalStorage.js"
+import { cerrarSesion, getLocalStorage, setLocalStorage } from "./moduloLocalStorage.js"
 import { datosValidos } from "./moduloCampos.js"
 window.addEventListener("load", inicializar)
 
@@ -85,11 +85,5 @@ function actualizarDatos(campo, campoID, usuarioActivo){
 
 function iniciarBotonCerrarSesion(){
     const btn = document.getElementById("cerrarSesion")
-    btn.addEventListener("click", function(e){
-        e.preventDefault()
-        localStorage.removeItem("usuarioActivo")
-        localStorage.removeItem("carrito")
-        localStorage.removeItem("historial")
-        location.href = "login.html"
-    })
+    btn.addEventListener("click", cerrarSesion)
 }
