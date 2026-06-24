@@ -10,19 +10,19 @@ export function invalidField(campo){
     campo.classList.add("is-invalid")
 }
 
-export function validarNombre(nombre){
-    if(estaNombre(nombre.value)){
-        if(validator.isAlphanumeric(nombre.value) && nombre.value.length > 4){
-            validField(nombre)
+export function validarUsername(username){
+    if(estaNombre(username.value)){
+        if(validator.isAlphanumeric(username.value) && username.value.length > 4){
+            validField(username)
             return true
         } else{
             document.getElementById("nombreError").textContent = "Usuario invalido"
-            invalidField(nombre)
+            invalidField(username)
             return false
         }
     } else{
         document.getElementById("nombreError").textContent = "El nombre de usuario ya existe"
-        invalidField(nombre)
+        invalidField(username)
         return false
     }
 }
@@ -77,18 +77,18 @@ export function validarTelefono(telefono){
     }
 }
 
-function estaNombre(nombre){
+function estaNombre(username){
     for(const n in usuarios){
-        if(nombre === usuarios[n].username && !(nombre === getLocalStorage("usuarioActivo").username)){
+        if(username === usuarios[n].username && !(username === getLocalStorage("usuarioActivo").username)){
             return false
         }
     }
     return true
 }
 
-export function datosValidos(nombre, contrasena, direccion, ciudad, codigoPostal, provincia, telefono){
+export function datosValidos(username, contrasena, direccion, ciudad, codigoPostal, provincia, telefono){
     let esValido = true
-    if(!validarNombre(nombre)){
+    if(!validarUsername(username)){
         esValido = false
     }
     if(!validarContrasena(contrasena)){
