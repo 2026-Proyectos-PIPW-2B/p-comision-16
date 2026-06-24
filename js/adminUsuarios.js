@@ -2,10 +2,12 @@ import {
   getLocalStorage,
   setLocalStorage,
   startLocalStorage,
+  startLocalStorageProductos,
 } from "./moduloLocalStorage.js";
 
 window.addEventListener("load", () => {
   startLocalStorage();
+  startLocalStorageProductos();
   renderizarUsuarios();
 });
 
@@ -44,12 +46,12 @@ function renderizarUsuarios() {
   });
 }
 
-function eliminarUsuario(índice) {
+function eliminarUsuario(indice) {
   const usuarios = getLocalStorage("users") || [];
-  if (índice < 0 || índice >= usuarios.length) return;
-  const usuario = usuarios[índice];
+  if (indice < 0 || indice >= usuarios.length) return;
+  const usuario = usuarios[indice];
   if (!confirm(`Eliminar usuario ${usuario.name}?`)) return;
-  usuarios.splice(índice, 1);
+  usuarios.splice(indice, 1);
   setLocalStorage("users", usuarios);
   renderizarUsuarios();
 }

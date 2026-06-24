@@ -1,15 +1,10 @@
 import { validField } from "./moduloCampos.js"
 import { invalidField } from "./moduloCampos.js"
-import { getLocalStorage, setLocalStorage } from "./moduloLocalStorage.js"
+import { getLocalStorage, setLocalStorage, startLocalStorage} from "./moduloLocalStorage.js"
 window.addEventListener("load", iniciar)
 
 function iniciar(){
-    const Admin = {
-        name: "A",
-        password: "1",
-        profile: "administrador"
-    }
-    const usuarios = [Admin]
+    startLocalStorage()
     if(getLocalStorage("usuarioActivo") != null){
         const usuarioActivo = getLocalStorage("usuarioActivo")
         if (usuarioActivo.profile === "administrador"){
@@ -17,9 +12,6 @@ function iniciar(){
         } else{
             location.href = "catalogo.html"
         }
-    }
-    if(getLocalStorage("users") === null){
-        setLocalStorage("users", usuarios)
     }
     const inputNombre = document.getElementById("usuario")
     const inputContrasena = document.getElementById("contrasena")

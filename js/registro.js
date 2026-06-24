@@ -1,9 +1,10 @@
 import { datosValidos } from "./moduloCampos.js"
-import { getLocalStorage } from "./moduloLocalStorage.js"
+import { getLocalStorage, startLocalStorage } from "./moduloLocalStorage.js"
 import { setLocalStorage } from "./moduloLocalStorage.js"
 window.addEventListener("load", iniciarRegistro)
 
 function iniciarRegistro(){
+    startLocalStorage()
     const btn = document.getElementById("btn-register")
     const usuarioARegistrar = document.querySelectorAll(".form-control")
     const inputNombre = usuarioARegistrar[0]
