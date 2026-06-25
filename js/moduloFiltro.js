@@ -7,3 +7,20 @@ export function filtroNombre(productos, nombreBuscado){
     }
     return productosFiltrados
 }
+
+export function ordernarPorNombre(productos){
+    const productosOrdenados = []
+    const nombresProductos = []
+    for(const i in productos){
+        nombresProductos.push(productos[i].nombre)
+    }
+    nombresProductos.sort()
+    for(const i in nombresProductos){
+        for(const j in productos){
+            if(nombresProductos[i] === productos[j].nombre){
+                productosOrdenados.push(productos[j])
+            }
+        }
+    }
+    return productosOrdenados
+}
