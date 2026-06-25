@@ -1,4 +1,5 @@
 import { crearImagen, getLocalStorage, setLocalStorage, startCarrito, startLocalStorageProductos } from "./moduloLocalStorage.js"
+import { filtroNombre } from "./moduloFiltro.js"
 window.addEventListener("load", iniciarCatalogo)
 
 function iniciarCatalogo(){
@@ -8,9 +9,15 @@ function iniciarCatalogo(){
     const grid = document.getElementById("productos-grid")
 
     crearCatalogo(productos, grid)
+
+    const filtroBuscar = document.getElementById("filtro-buscar")
+    filtroBuscar.addEventListener("keyup", ()=>{
+        crearCatalogo(filtroNombre(productos,filtroBuscar.value),grid)
+    })
 }
 
 function crearCatalogo(productos, grid){
+    grid.textContent = ""
     for(const i in productos){
         if(productos[i].existe){
             const article = document.createElement("article")
