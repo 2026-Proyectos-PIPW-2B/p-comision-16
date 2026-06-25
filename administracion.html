@@ -110,35 +110,32 @@
                 <h3 class="h6">Productos</h3>
                 <div id="lista-productos-admin" class="table-responsive">
                   <table
-                    class="table table-dark table-striped"
+                    class="table table-dark table-striped table-sm"
                     id="tabla-productos-admin"
                   >
                     <thead>
                       <tr>
-                        <th>ID Venta</th>
                         <th>Producto</th>
-                        <th>Cliente</th>
-                        <th>Cantidad</th>
-                        <th>Precio Unit.</th>
-                        <th>Total</th>
+                        <th>Precio</th>
+                        <th>Acciones</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td>V-0001</td>
                         <td>
-                          <button
-                            class="btn btn-sm btn-outline-light"
-                            data-bs-toggle="modal"
-                            data-bs-target="#modalProductos"
-                          >
-                            Ver productos
+                          <img
+                            src="img/7155-AFmP9L._SY500_.jpg"
+                            alt="Producto ejemplo"
+                            class="img-fluid me-2"
+                            width="50"
+                          />Producto de Ejemplo
+                        </td>
+                        <td>$499.99</td>
+                        <td>
+                          <button class="btn btn-sm btn-outline-light">
+                            Agregar al catálogo
                           </button>
                         </td>
-                        <td>Juan Pablo</td>
-                        <td>1</td>
-                        <td>$1,299.99</td>
-                        <td>$1,299.99</td>
                       </tr>
                     </tbody>
                   </table>
@@ -148,12 +145,26 @@
           </div>
         </div>
       </section>
-      <div class="modal fade" id="modalProductos" tabindex="-1" aria-labelledby="modalProductos" style="display: none;" aria-hidden="true">
+      <div
+        class="modal fade"
+        id="modalProductos"
+        tabindex="-1"
+        aria-labelledby="modalProductos"
+        style="display: none"
+        aria-hidden="true"
+      >
         <div class="modal-dialog modal-fullscreen-sm-down modal-lg">
           <div class="modal-content bg-secondary">
             <div class="modal-header">
-              <h1 class="modal-title fs-4 text-light" id="modalProductos">Productos del usuario</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <h1 class="modal-title fs-4 text-light" id="modalProductos">
+                Productos del usuario
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
             </div>
             <div class="modal-body">
               <table class="table table-dark table-striped">
@@ -167,7 +178,15 @@
                 <tbody id="listaProductos"></tbody>
               </table>
             </div>
-            <div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button></div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cerrar
+              </button>
+            </div>
           </div>
         </div>
       </div>
