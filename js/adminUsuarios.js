@@ -17,8 +17,10 @@ function renderizarUsuarios() {
   const tbody = document.getElementById("usuarios-tbody");
   if (!tbody) return;
   tbody.innerHTML = "";
+  const usuarioActivo = getLocalStorage("usuarioActivo") || {};
 
   usuarios.forEach((u, indice) => {
+    if (u.username === usuarioActivo.username) return;
     const tr = document.createElement("tr");
     const nombre = u.username || "";
     const dirección = u.address || u.direccion || "";
@@ -55,7 +57,7 @@ function eliminarUsuario(indice) {
   usuarios.splice(indice, 1);
   setLocalStorage("users", usuarios);
   renderizarUsuarios();
-  if(usuario.username === getLocalStorage("usuarioActivo").name){
-    cerrarSesion()
+  if (usuario.username === getLocalStorage("usuarioActivo").name) {
+    cerrarSesion();
   }
 }
