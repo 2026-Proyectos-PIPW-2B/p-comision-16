@@ -71,6 +71,7 @@ function productosPorDefecto(){
     const precios = [20,200,1400,10,8,40,6,15,40000]
     const imagenes = ["img/7155-AFmP9L._SY500_.jpg", "img/blackberry-bold-touch-9900-4541-g-alt.jpg", "img/WF-100_C11CE05302_3.jpg", "img/Globos-Helio.png", "img/Destornillador.png", "img/Pala.jpg", "img/Cubiertos.jpg", "img/Platos.jpg", "img/Fiat600.jpg"]
 
+
     for(const i in nombreProductos){
         const producto ={
             nombre: nombreProductos[i],
@@ -79,6 +80,7 @@ function productosPorDefecto(){
             cantidad: 1,
             existe: true,
         }
+        agregarEtiqueta(producto)
         productos.push(producto)
     }
     return productos
@@ -121,5 +123,33 @@ export function sumarCompra(compra, usuario){
         ventas.push(venta)
         setLocalStorage("ventas", ventas)
         return venta.id
+    }
+}
+
+function agregarEtiqueta(producto, etiquetaNueva = false){
+    if(etiquetaNueva){
+        producto.etiqueta = etiquetaNueva
+    } else{
+        switch(producto.nombre){
+            case("Peluche Kasane Teto"):
+            case("Globos con Helio"):
+                producto.etiqueta = "Recreación"
+                break
+            case("BlackBerry Bold Touch 9900"):
+            case("Impresora Portátil Epson WorkForce WF-100"):
+                producto.etiqueta = "Tecnólogia"
+                break
+            case("Destornillador Plano 8x200 Mm Stanley"):
+            case("Pala Punta Con Mango Anilla"):
+                producto.etiqueta = "Herramienta"
+                break
+            case('Cubiertos "Comunes"'):
+            case("Platos Blancos"):
+                producto.etiqueta = "Cocina"
+                break
+            case("Fiat 600"):
+                producto.etiqueta = "Vehículo"
+                break
+        }
     }
 }
