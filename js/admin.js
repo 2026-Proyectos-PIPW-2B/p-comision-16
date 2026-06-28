@@ -18,8 +18,8 @@ window.addEventListener("load", ()=>{
 function crearTablaProductos(){
     const tablaProductos = document.getElementById("tabla-productos-admin")
     const productos = getLocalStorage("products")
-    tablaProductos.textContent = ""
     const tbody = document.createElement("tbody")
+    tbody.textContent = ""
 
     for(const i in productos){
         
@@ -45,7 +45,8 @@ function crearTablaProductos(){
         tdEtiqueta.appendChild(inputEtiqueta)
 
         const tdPrecio = document.createElement("td")
-        tdPrecio.textContent = productos[i].precio
+        tdPrecio.textContent = `$${productos[i].precio}`
+
         const tdBoton = document.createElement("td")
         const boton = document.createElement("button")
         boton.classList.add("btn", "btn-sm", "btn-outline-light")
