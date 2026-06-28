@@ -26,7 +26,7 @@ function crearTablaProductos(){
         const fila = document.createElement("tr")
 
         const tdImagen = document.createElement("td")
-        const imagen = crearImagen(productos[i],50,50,["img-fluid","me-2"])
+        const imagen = crearImagen(productos[i],50,50,["me-2"])
         tdImagen.appendChild(imagen)
 
         const tdNombre = document.createElement("td")
