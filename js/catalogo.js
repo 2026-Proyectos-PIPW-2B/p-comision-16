@@ -1,4 +1,5 @@
 import { crearImagen, getLocalStorage, setLocalStorage, startCarrito, startLocalStorageProductos } from "./moduloLocalStorage.js"
+import { filtroNombre, ordernarPorNombre, ordenarPorPrecio } from "./moduloFiltro.js"
 window.addEventListener("load", iniciarCatalogo)
 
 function iniciarCatalogo(){
@@ -8,9 +9,44 @@ function iniciarCatalogo(){
     const grid = document.getElementById("productos-grid")
 
     crearCatalogo(productos, grid)
+
+    const filtroBuscar = document.getElementById("filtro-buscar")
+    filtroBuscar.addEventListener("keyup", ()=>{
+        crearCatalogo(filtroNombre(productos,filtroBuscar.value),grid)
+    })
+
+    let ordenadoNombre = false
+    const btnOrdernarNombre = document.getElementById("btn-ordenar-nombre")
+    btnOrdernarNombre.addEventListener("click", ()=>{
+        if(!ordenadoNombre){
+            crearCatalogo(ordernarPorNombre(productos),grid)
+            ordenadoNombre = true
+            ordenadoPrecio = false
+        } else{
+            crearCatalogo(productos,grid)
+            ordenadoNombre = false
+        }
+    })
+
+    let ordenadoPrecio
+    const btnOrdernarPrecio = document.getElementById("btn-ordenar-precio")
+    btnOrdernarPrecio.addEventListener("click", ()=>{
+        if(!ordenadoPrecio){
+            crearCatalogo(ordenarPorPrecio(getLocalStorage("products")),grid)
+            ordenadoPrecio = true
+            ordenadoNombre = false
+        } else{
+            crearCatalogo(productos,grid)
+            ordenadoPrecio = false
+        }
+    })
+
+
+
 }
 
 function crearCatalogo(productos, grid){
+    grid.textContent = ""
     for(const i in productos){
         if(productos[i].existe){
             const article = document.createElement("article")

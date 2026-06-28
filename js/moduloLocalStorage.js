@@ -115,6 +115,7 @@ export function sumarCompra(compra, usuario){
         const ventas = getLocalStorage("ventas")
         const venta = {
             venta: compra,
+            usuarioAsociado: usuario,
             id: ventas.length+1,
         }
         ventas.push(venta)
