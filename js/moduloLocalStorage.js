@@ -126,7 +126,7 @@ export function sumarCompra(compra, usuario){
     }
 }
 
-function agregarEtiqueta(producto, etiquetaNueva = false){
+export function agregarEtiqueta(producto, etiquetaNueva = false){
     if(etiquetaNueva){
         producto.etiqueta = etiquetaNueva
     } else{
