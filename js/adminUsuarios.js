@@ -2,12 +2,10 @@ import {
   cerrarSesion,
   getLocalStorage,
   setLocalStorage,
-  startLocalStorage,
   startLocalStorageProductos,
 } from "./moduloLocalStorage.js";
 
 window.addEventListener("load", () => {
-  startLocalStorage();
   startLocalStorageProductos();
   renderizarUsuarios();
 });
