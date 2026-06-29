@@ -4,7 +4,16 @@ import { getLocalStorage, setLocalStorage, startLocalStorage} from "./moduloLoca
 window.addEventListener("load", iniciar)
 
 function iniciar(){
-    startLocalStorage()
+    const btnDefault = document.getElementById("defaultValues")
+    if(getLocalStorage("users") === null){
+        btnDefault.classList.remove("visually-hidden")
+        btnDefault.addEventListener("click", function(e){
+            e.preventDefault()
+            btnDefault.classList.add("visually-hidden")
+            startLocalStorage()
+        })
+    }
+
     if(getLocalStorage("usuarioActivo") != null){
         const usuarioActivo = getLocalStorage("usuarioActivo")
         if (usuarioActivo.profile === "administrador"){

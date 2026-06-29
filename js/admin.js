@@ -1,9 +1,11 @@
-import { crearImagen, getLocalStorage, setLocalStorage } from "./moduloLocalStorage.js"
+import { crearImagen, getLocalStorage, setLocalStorage, startLocalStorageProductos } from "./moduloLocalStorage.js"
 
 window.addEventListener("load", ()=>{
-    
+    startLocalStorageProductos()
     crearTablaProductos()
 
+    const timer = document.getElementById("timer")
+    timer.value = getLocalStorage("timer")/60
     timer.addEventListener("change", ()=>{
         setLocalStorage("timer", timer.value*60)
         setLocalStorage("time", 0)
