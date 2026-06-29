@@ -127,10 +127,12 @@ function calcularTotal(productos){
 
 function confirmarCompra(){
     if(getLocalStorage("carrito").length > 0){
-        addHistorial(getLocalStorage("carrito"))
-        window.alert("Se ha realizado la compra con éxito")
-        setLocalStorage("carrito",[])
-        iniciarCarrito()
+        if(window.confirm("Confirmar compra")){
+            addHistorial(getLocalStorage("carrito"))
+            window.alert("Se ha realizado la compra con éxito")
+            setLocalStorage("carrito",[])
+            iniciarCarrito()
+        }
     }
 }
 
