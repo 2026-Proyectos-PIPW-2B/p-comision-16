@@ -32,8 +32,8 @@ function crearTabla(historial){
         tdBoton.appendChild(boton)
 
         tr.appendChild(tdFecha)
-        tr.appendChild(tdPrecio)
         tr.appendChild(tdBoton)
+        tr.appendChild(tdPrecio)
         tableBody.appendChild(tr)
     }
     return tableBody
