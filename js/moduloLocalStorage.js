@@ -141,14 +141,14 @@ export function agregarEtiqueta(producto, etiquetaNueva = false){
                 break
             case("Destornillador Plano 8x200 Mm Stanley"):
             case("Pala Punta Con Mango Anilla"):
-                producto.etiqueta = "Herramienta"
+                producto.etiqueta = "Herramientas"
                 break
             case('Cubiertos "Comunes"'):
             case("Platos Blancos"):
                 producto.etiqueta = "Cocina"
                 break
             case("Fiat 600"):
-                producto.etiqueta = "Vehículo"
+                producto.etiqueta = "Vehículos"
                 break
         }
     }
