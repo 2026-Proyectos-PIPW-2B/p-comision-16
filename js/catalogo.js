@@ -7,6 +7,7 @@ function iniciarCatalogo(){
     startLocalStorageProductos()
     const productos = getLocalStorage("products")
     const grid = document.getElementById("productos-grid")
+    const filtroCategoria = crearFiltroCategoria()
 
     crearCatalogo(productos, grid)
 
@@ -41,8 +42,17 @@ function iniciarCatalogo(){
         }
     })
 
-
-
+    
+    filtroCategoria.addEventListener("change", ()=>{
+        const productos = getLocalStorage("products")
+        const productosFiltrados = []
+        for(const i in productos){
+            if(filtroCategoria.value === "default" || filtroCategoria.value === productos[i].etiqueta){
+                productosFiltrados.push(productos[i])
+            }
+        }
+        crearCatalogo(productosFiltrados,grid)
+    })
 }
 
 function crearCatalogo(productos, grid){
@@ -134,4 +144,23 @@ function crearListaCatalogo(producto){
     ul.appendChild(liImg)
     ul.appendChild(li)
     listaCatalogo.appendChild(ul)
+}
+
+function crearFiltroCategoria(){
+    const filtroCategoria = document.getElementById("filtro-categoria")
+    const categorias = []
+    const productos = getLocalStorage("products")
+    for(const i in productos){
+        if(!categorias.includes(productos[i].etiqueta)){
+            categorias.push(productos[i].etiqueta)
+        }
+    }
+    for(const i in categorias){
+        const option = document.createElement("option")
+        option.value = categorias[i]
+        option.innerText = categorias[i]
+        filtroCategoria.appendChild(option)
+    }
+
+    return filtroCategoria
 }
