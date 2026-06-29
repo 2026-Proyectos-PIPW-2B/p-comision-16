@@ -89,18 +89,31 @@ function productosPorDefecto(){
 function usuariosPorDefecto(){
     const usuarios = []
     const Admin = {
-        username: "Admin1",
+        username: "administrador",
         nombre: "nombreAdmin",
         apellido: "apellidoAdmin",
-        password: "1234gG**",
+        password: "administrador",
         address: "Calle123",
         city: "Buenos Aires",
         code: 8000,
         prov: "Bahía Blanca",
-        phone: 2914412046,
+        phone: 2914456789,
         profile: "administrador"
     }
+    const User = {
+        username: "usuario",
+        nombre: "nombreUsuario",
+        apellido: "apellidoUsuario",
+        password: "usuario",
+        address: "Calle456",
+        city: "Buenos Aires",
+        code: 8000,
+        prov: "Bahía Blanca",
+        phone: 2914456766,
+        profile: "usuario_final"
+    }
     usuarios.push(Admin)
+    usuarios.push(User)
     return usuarios
 }
 
