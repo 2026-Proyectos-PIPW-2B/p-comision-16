@@ -4,7 +4,6 @@ window.addEventListener("load", iniciarCatalogo)
 
 function iniciarCatalogo(){
     startCarrito()
-    startLocalStorageProductos()
     const productos = getLocalStorage("products")
     const grid = document.getElementById("productos-grid")
     const filtroCategoria = crearFiltroCategoria()

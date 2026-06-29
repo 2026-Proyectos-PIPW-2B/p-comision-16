@@ -1,18 +1,16 @@
 import { validField } from "./moduloCampos.js"
 import { invalidField } from "./moduloCampos.js"
-import { getLocalStorage, setLocalStorage, startLocalStorage} from "./moduloLocalStorage.js"
+import { getLocalStorage, setLocalStorage, startLocalStorage, startLocalStorageProductos} from "./moduloLocalStorage.js"
 window.addEventListener("load", iniciar)
 
 function iniciar(){
     const btnDefault = document.getElementById("defaultValues")
-    if(getLocalStorage("users") === null){
-        btnDefault.classList.remove("visually-hidden")
-        btnDefault.addEventListener("click", function(e){
-            e.preventDefault()
-            btnDefault.classList.add("visually-hidden")
-            startLocalStorage()
-        })
-    }
+    btnDefault.addEventListener("click", function(e){
+        e.preventDefault()
+        btnDefault.classList.add("visually-hidden")
+        startLocalStorage()
+        startLocalStorageProductos()
+    })
 
     if(getLocalStorage("usuarioActivo") != null){
         const usuarioActivo = getLocalStorage("usuarioActivo")
@@ -22,6 +20,7 @@ function iniciar(){
             location.href = "catalogo.html"
         }
     }
+    
     const inputNombre = document.getElementById("usuario")
     const inputContrasena = document.getElementById("contrasena")
     const btn = document.getElementById("btn-login")
@@ -29,8 +28,8 @@ function iniciar(){
         e.preventDefault()
         validarUsuario(inputNombre, inputContrasena)
     })
-}
 
+}
 function validarUsuario(nombre,contrasena){
     const user = validarContrasena(validarNombre(nombre), contrasena)
     if(user != null){

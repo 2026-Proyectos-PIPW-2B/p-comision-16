@@ -62,7 +62,7 @@ export function cerrarSesion(){
     localStorage.removeItem("usuarioActivo")
     localStorage.removeItem("carrito")
     localStorage.removeItem("historial")
-    location.href = "login.html"
+    location.href = "index.html"
 }
 
 function productosPorDefecto(){

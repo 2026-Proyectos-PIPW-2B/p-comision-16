@@ -6,7 +6,6 @@ import {
 } from "./moduloLocalStorage.js";
 
 window.addEventListener("load", () => {
-  startLocalStorageProductos();
   renderizarUsuarios();
 });
 
