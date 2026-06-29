@@ -150,7 +150,7 @@ export function agregarEtiqueta(producto, etiquetaNueva = false){
                 break
             case("BlackBerry Bold Touch 9900"):
             case("Impresora Portátil Epson WorkForce WF-100"):
-                producto.etiqueta = "Tecnólogia"
+                producto.etiqueta = "Tecnología"
                 break
             case("Destornillador Plano 8x200 Mm Stanley"):
             case("Pala Punta Con Mango Anilla"):
