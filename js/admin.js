@@ -3,7 +3,8 @@ import { crearImagen, getLocalStorage, setLocalStorage, startLocalStorageProduct
 window.addEventListener("load", ()=>{
     startLocalStorageProductos()
     crearTablaProductos()
-
+    inicializarSelectorAdmin()
+    
     const timer = document.getElementById("timer")
     timer.value = getLocalStorage("timer")/60
     timer.addEventListener("change", ()=>{
@@ -89,4 +90,18 @@ function definirBoton(boton, existencia){
         boton.textContent = "Dar de alta"
         boton.classList.add("bg-success")
     }
+}
+
+function inicializarSelectorAdmin(){
+    const adminSelect = document.getElementById("adminSelect")
+    const usuariosPanel = document.getElementById("admin-usuarios")
+    const productosPanel = document.getElementById("admin-productos")
+
+    function actualizarPaneles(){
+        usuariosPanel.classList.toggle("visually-hidden", adminSelect.value !== "usuarios")
+        productosPanel.classList.toggle("visually-hidden", adminSelect.value !== "productos")
+    }
+
+    adminSelect.addEventListener("change", actualizarPaneles)
+    actualizarPaneles()
 }
