@@ -22,7 +22,8 @@ export function ordernarPorNombre(productos){
             }
         }
     }
-    return productosOrdenados
+    if(productosOrdenados.length > 0)
+        return productosOrdenados
 }
 
 export function ordenarPorPrecio(productos){

@@ -5,6 +5,8 @@ window.addEventListener("load", iniciarCatalogo)
 function iniciarCatalogo(){
     startCarrito()
     const productos = getLocalStorage("products")
+    let productosOrdenados = []
+    let productosFiltrados
     const grid = document.getElementById("productos-grid")
     const filtroCategoria = crearFiltroCategoria()
 
@@ -19,11 +21,13 @@ function iniciarCatalogo(){
     const btnOrdernarNombre = document.getElementById("btn-ordenar-nombre")
     btnOrdernarNombre.addEventListener("click", ()=>{
         if(!ordenadoNombre){
-            crearCatalogo(ordernarPorNombre(productos),grid)
+            productosOrdenados = ordernarPorNombre(productosOrdenados) || ordernarPorNombre(productos)
+            crearCatalogo(productosOrdenados,grid)
             ordenadoNombre = true
             ordenadoPrecio = false
         } else{
-            crearCatalogo(productos,grid)
+            productosOrdenados = productosFiltrados || productos
+            crearCatalogo(productosOrdenados,grid)
             ordenadoNombre = false
         }
     })
@@ -43,8 +47,7 @@ function iniciarCatalogo(){
 
     
     filtroCategoria.addEventListener("change", ()=>{
-        const productos = getLocalStorage("products")
-        const productosFiltrados = []
+        productosFiltrados = productosOrdenados.value || []
         for(const i in productos){
             if(filtroCategoria.value === "default" || filtroCategoria.value === productos[i].etiqueta){
                 productosFiltrados.push(productos[i])
