@@ -8,6 +8,7 @@ function iniciar(){
     btnDefault.addEventListener("click", function(e){
         e.preventDefault()
         btnDefault.classList.add("visually-hidden")
+        localStorage.clear()
         startLocalStorage()
         startLocalStorageProductos()
     })

@@ -79,7 +79,7 @@ export function validarTelefono(telefono){
 
 function estaNombre(username){
     for(const n in usuarios){
-        if(username === usuarios[n].username && !(username === getLocalStorage("usuarioActivo").username)){
+        if(username === usuarios[n].username){
             return false
         }
     }

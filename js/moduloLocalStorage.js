@@ -182,7 +182,7 @@ export function agregarEtiqueta(producto, etiquetaNueva = false) {
     }
   }
 }
-export function crearProducto(nombre, imagen, precio, stock) {
+export function crearProducto(nombre, imagen, precio, stock, etiqueta) {
   const producto = {
     nombre: nombre,
     imagen: imagen,
@@ -190,6 +190,7 @@ export function crearProducto(nombre, imagen, precio, stock) {
     cantidad: 1,
     stock: stock,
     existe: true,
+    etiqueta: etiqueta,
   };
   return producto;
 }

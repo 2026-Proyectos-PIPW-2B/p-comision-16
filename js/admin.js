@@ -1,4 +1,5 @@
-import { crearImagen, getLocalStorage, setLocalStorage, startLocalStorageProductos } from "./moduloLocalStorage.js"
+import { invalidField, validField } from "./moduloCampos.js"
+import { crearImagen, crearProducto, getLocalStorage, setLocalStorage,} from "./moduloLocalStorage.js"
 
 window.addEventListener("load", ()=>{
     crearTablaProductos()
@@ -11,6 +12,26 @@ window.addEventListener("load", ()=>{
         setLocalStorage("time", 0)
     })
 
+    const botonAgregar = document.getElementById("agregarProducto")
+
+    const datosDelProducto = document.querySelectorAll(".form-control")
+    botonAgregar.addEventListener("click", function(e){
+        e.preventDefault()
+        if(validarProducto(datosDelProducto[0],datosDelProducto[1],datosDelProducto[2],datosDelProducto[3],datosDelProducto[4])){
+            const modal = document.getElementById("modalAgregarProducto")
+            const modalInstance = bootstrap.Modal.getInstance(modal)
+            const productos = getLocalStorage("products")
+            productos.push(crearProducto(datosDelProducto[0].value,datosDelProducto[1].value,datosDelProducto[2].value,datosDelProducto[3].value,datosDelProducto[4].value))
+            setLocalStorage("products", productos)
+            crearTablaProductos()
+            for(let i = 0; i<=4;i++){
+                datosDelProducto[i].value = ""
+                datosDelProducto[i].classList.remove("is-valid")
+            }
+            modalInstance.hide()
+        }
+    })
+
     if(getLocalStorage("usuarioActivo").profile != "administrador"){
         window.alert("Esta vista es exclusiva para administradores")
         location.href = "catalogo.html"
@@ -20,7 +41,8 @@ window.addEventListener("load", ()=>{
 function crearTablaProductos(){
     const tablaProductos = document.getElementById("tabla-productos-admin")
     const productos = getLocalStorage("products")
-    const tbody = document.createElement("tbody")
+    const tbody = document.getElementById("tbody") || document.createElement("tbody")
+    tbody.id = "tbody"
     tbody.textContent = ""
 
     for(const i in productos){
@@ -116,4 +138,39 @@ function inicializarSelectorAdmin(){
 
     adminSelect.addEventListener("change", actualizarPaneles)
     actualizarPaneles()
+}
+
+function validarProducto(nombre,imagen,precio,stock,etiqueta){
+    let valido = true
+    if(nombre.value === ""){
+        valido = false
+        invalidField(nombre)
+    } else{
+        validField(nombre)
+    }
+    if(imagen.value === ""){
+        valido = false
+        invalidField(imagen)
+    } else{
+        validField(imagen)
+    }
+    if(precio.value === ""){
+        valido = false
+        invalidField(precio)
+    } else{
+        validField(precio)
+    }
+    if(stock.value === ""){
+        valido = false
+        invalidField(stock)
+    } else{
+        validField(stock)
+    }
+    if(etiqueta.value === ""){
+        valido = false
+        invalidField(etiqueta)
+    } else{
+        validField(etiqueta)
+    }
+    return valido
 }
