@@ -49,6 +49,18 @@ function crearTablaProductos(){
         const tdPrecio = document.createElement("td")
         tdPrecio.textContent = `$${productos[i].precio}`
 
+        const tdStock = document.createElement("td")
+        const inputStock = document.createElement("input")
+        inputStock.type = "number"
+        inputStock.value = productos[i].stock
+
+        inputStock.addEventListener("keyup", ()=>{
+            productos[i].stock = parseInt(inputStock.value)
+            setLocalStorage("products", productos)
+        })
+
+        tdStock.appendChild(inputStock)
+
         const tdBoton = document.createElement("td")
         const boton = document.createElement("button")
         boton.classList.add("btn", "btn-sm", "btn-outline-light")
@@ -72,6 +84,7 @@ function crearTablaProductos(){
         fila.appendChild(tdNombre)
         fila.appendChild(tdEtiqueta)
         fila.appendChild(tdPrecio)
+        fila.appendChild(tdStock)
         fila.appendChild(tdBoton)
 
         tbody.appendChild(fila)

@@ -77,10 +77,17 @@ function crearCatalogo(productos, grid){
             precioProducto.textContent = `$${productos[i].precio}`
             precioProducto.classList.add("card-text", "mb-2")
 
+            const Stock = document.createElement("p")
+            Stock.textContent = `Stock: ${productos[i].stock}`
+            Stock.classList.add("card-text", "mb-2")
+
+            stockCantidad(Stock, productos[i].stock);
+
             const boton = botonAgregarCarrito(productos[i])
 
             divCardBody.appendChild(cardName)
             divCardBody.appendChild(precioProducto)
+            divCardBody.appendChild(Stock)
             divCardBody.appendChild(boton)
             divCard.appendChild(img)
             divCard.appendChild(divCardBody)
@@ -162,4 +169,14 @@ function crearFiltroCategoria(){
     }
 
     return filtroCategoria
+}
+
+function stockCantidad(Stock, stock){
+  if (stock <= 5) {
+    Stock.classList.add("text-danger");
+  } else if (stock <= 20) {
+    Stock.classList.add("text-warning");
+  } else {
+    Stock.classList.add("text-success");
+  }
 }

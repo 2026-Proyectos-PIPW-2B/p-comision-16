@@ -143,6 +143,15 @@ function addHistorial(carrito){
     } else{
         historial = getLocalStorage("historial")
     }
+    const productos = getLocalStorage("products")
+    for(const i in carrito){
+        for(const j in productos){
+            if(carrito[i].nombre === productos[j].nombre){
+                productos[j].stock -= carrito[i].cantidad
+                setLocalStorage("products", productos)
+            }
+        }
+    }
     const fecha = new Date()
         const productoHistorial = {
             fecha: `${fecha.getFullYear()}-${fecha.getMonth()+1}-${fecha.getDate()}`,
