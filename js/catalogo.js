@@ -1,5 +1,5 @@
 import { crearImagen, getLocalStorage, setLocalStorage, startCarrito, startLocalStorageProductos } from "./moduloLocalStorage.js"
-import { filtroNombre, ordernarPorNombre, ordenarPorPrecio } from "./moduloFiltro.js"
+import { filtroNombre, ordernarPorNombre, ordenarPorPrecio, filtrar } from "./moduloFiltro.js"
 window.addEventListener("load", iniciarCatalogo)
 
 function iniciarCatalogo(){
@@ -14,7 +14,7 @@ function iniciarCatalogo(){
 
     const filtroBuscar = document.getElementById("filtro-buscar")
     filtroBuscar.addEventListener("keyup", ()=>{
-        crearCatalogo(filtroNombre(productos,filtroBuscar.value),grid)
+        crearCatalogo(filtrar(productos,filtroBuscar.value),grid)
     })
 
     let ordenadoNombre = false
@@ -22,12 +22,11 @@ function iniciarCatalogo(){
     btnOrdernarNombre.addEventListener("click", ()=>{
         if(!ordenadoNombre){
             productosOrdenados = ordernarPorNombre(productosOrdenados) || ordernarPorNombre(productos)
-            crearCatalogo(productosOrdenados,grid)
+            crearCatalogo(filtrar(productosOrdenados,filtroBuscar.value),grid)
             ordenadoNombre = true
             ordenadoPrecio = false
         } else{
-            productosOrdenados = productosFiltrados || productos
-            crearCatalogo(productosOrdenados,grid)
+            crearCatalogo(filtrar(productos,filtroBuscar.value),grid)
             ordenadoNombre = false
         }
     })
@@ -36,24 +35,18 @@ function iniciarCatalogo(){
     const btnOrdernarPrecio = document.getElementById("btn-ordenar-precio")
     btnOrdernarPrecio.addEventListener("click", ()=>{
         if(!ordenadoPrecio){
-            crearCatalogo(ordenarPorPrecio(getLocalStorage("products")),grid)
+            crearCatalogo(ordenarPorPrecio(filtrar(getLocalStorage("products"),filtroBuscar.value)),grid)
             ordenadoPrecio = true
             ordenadoNombre = false
         } else{
-            crearCatalogo(productos,grid)
+            crearCatalogo(filtrar(productos,filtroBuscar.value),grid)
             ordenadoPrecio = false
         }
     })
 
     
     filtroCategoria.addEventListener("change", ()=>{
-        productosFiltrados = productosOrdenados.value || []
-        for(const i in productos){
-            if(filtroCategoria.value === "default" || filtroCategoria.value === productos[i].etiqueta){
-                productosFiltrados.push(productos[i])
-            }
-        }
-        crearCatalogo(productosFiltrados,grid)
+        crearCatalogo(filtrar(productos,filtroBuscar.value),grid)
     })
 }
 
