@@ -17,7 +17,7 @@ function inicializar(){
 
     const update = document.getElementById("actualizar")
     update.addEventListener("click", ()=>{
-        if(datosValidos(inputNombre, inputContrasena, inputDireccion, inputCiudad, inputCodigoPostal, inputProvincia, inputTelefono)){
+        if(datosValidos(inputNombre, inputContrasena, inputDireccion, inputCiudad, inputCodigoPostal, inputProvincia, inputTelefono) && window.confirm("Actualizar datos")){
             actualizarDatos(inputNombre, inputNombre.id, usuarioActivo)
             actualizarDatos(inputContrasena, inputContrasena.id, usuarioActivo)
             actualizarDatos(inputDireccion, inputDireccion.id, usuarioActivo)
@@ -25,6 +25,7 @@ function inicializar(){
             actualizarDatos(inputCodigoPostal, inputCodigoPostal.id, usuarioActivo)
             actualizarDatos(inputProvincia, inputProvincia.id, usuarioActivo)
             actualizarDatos(inputTelefono, inputTelefono.id, usuarioActivo)
+            window.alert("Datos actulizados exitosamente")
         }
     })
 
