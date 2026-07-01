@@ -6,7 +6,6 @@ function iniciarCatalogo(){
     startCarrito()
     const productos = getLocalStorage("products")
     let productosOrdenados = []
-    let productosFiltrados
     const grid = document.getElementById("productos-grid")
     const filtroCategoria = crearFiltroCategoria()
 
@@ -153,7 +152,7 @@ function crearFiltroCategoria(){
     const categorias = []
     const productos = getLocalStorage("products")
     for(const i in productos){
-        if(!categorias.includes(productos[i].etiqueta)){
+        if(productos[i].etiqueta.length > 0 && !categorias.includes(productos[i].etiqueta)){
             categorias.push(productos[i].etiqueta)
         }
     }
