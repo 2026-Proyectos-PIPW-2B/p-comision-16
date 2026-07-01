@@ -68,10 +68,10 @@ function crearTablaAdmin(){
         })
         tdBoton.appendChild(boton)
 
-        tr.appendChild(tdUsuario)
         tr.appendChild(tdFecha)
         tr.appendChild(tdBoton)
         tr.appendChild(tdPrecio)
+        tr.appendChild(tdUsuario)
         tableBody.appendChild(tr)
     }
     return tableBody
