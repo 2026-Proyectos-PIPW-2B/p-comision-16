@@ -3,50 +3,55 @@ import { filtroNombre, ordernarPorNombre, ordenarPorPrecio, filtrar } from "./mo
 window.addEventListener("load", iniciarCatalogo)
 
 function iniciarCatalogo(){
-    startCarrito()
-    const productos = getLocalStorage("products")
-    let productosOrdenados = []
-    const grid = document.getElementById("productos-grid")
-    const filtroCategoria = crearFiltroCategoria()
+    if(getLocalStorage("usuarioActivo").profile === "administrador"){
+        window.alert("Esta vista es exclusiva para usuarios")
+        location.href = "administracion.html"
+    } else{
+        startCarrito()
+        const productos = getLocalStorage("products")
+        let productosOrdenados = []
+        const grid = document.getElementById("productos-grid")
+        const filtroCategoria = crearFiltroCategoria()
 
-    crearCatalogo(productos, grid)
+        crearCatalogo(productos, grid)
 
-    const filtroBuscar = document.getElementById("filtro-buscar")
-    filtroBuscar.addEventListener("keyup", ()=>{
-        crearCatalogo(filtrar(productos,filtroBuscar.value),grid)
-    })
-
-    let ordenadoNombre = false
-    const btnOrdernarNombre = document.getElementById("btn-ordenar-nombre")
-    btnOrdernarNombre.addEventListener("click", ()=>{
-        if(!ordenadoNombre){
-            productosOrdenados = ordernarPorNombre(productosOrdenados) || ordernarPorNombre(productos)
-            crearCatalogo(filtrar(productosOrdenados,filtroBuscar.value),grid)
-            ordenadoNombre = true
-            ordenadoPrecio = false
-        } else{
+        const filtroBuscar = document.getElementById("filtro-buscar")
+        filtroBuscar.addEventListener("keyup", ()=>{
             crearCatalogo(filtrar(productos,filtroBuscar.value),grid)
-            ordenadoNombre = false
-        }
-    })
+        })
 
-    let ordenadoPrecio
-    const btnOrdernarPrecio = document.getElementById("btn-ordenar-precio")
-    btnOrdernarPrecio.addEventListener("click", ()=>{
-        if(!ordenadoPrecio){
-            crearCatalogo(ordenarPorPrecio(filtrar(getLocalStorage("products"),filtroBuscar.value)),grid)
-            ordenadoPrecio = true
-            ordenadoNombre = false
-        } else{
+        let ordenadoNombre = false
+        const btnOrdernarNombre = document.getElementById("btn-ordenar-nombre")
+        btnOrdernarNombre.addEventListener("click", ()=>{
+            if(!ordenadoNombre){
+                productosOrdenados = ordernarPorNombre(productosOrdenados) || ordernarPorNombre(productos)
+                crearCatalogo(filtrar(productosOrdenados,filtroBuscar.value),grid)
+                ordenadoNombre = true
+                ordenadoPrecio = false
+            } else{
+                crearCatalogo(filtrar(productos,filtroBuscar.value),grid)
+                ordenadoNombre = false
+            }
+        })
+
+        let ordenadoPrecio
+        const btnOrdernarPrecio = document.getElementById("btn-ordenar-precio")
+        btnOrdernarPrecio.addEventListener("click", ()=>{
+            if(!ordenadoPrecio){
+                crearCatalogo(ordenarPorPrecio(filtrar(getLocalStorage("products"),filtroBuscar.value)),grid)
+                ordenadoPrecio = true
+                ordenadoNombre = false
+            } else{
+                crearCatalogo(filtrar(productos,filtroBuscar.value),grid)
+                ordenadoPrecio = false
+            }
+        })
+
+        
+        filtroCategoria.addEventListener("change", ()=>{
             crearCatalogo(filtrar(productos,filtroBuscar.value),grid)
-            ordenadoPrecio = false
-        }
-    })
-
-    
-    filtroCategoria.addEventListener("change", ()=>{
-        crearCatalogo(filtrar(productos,filtroBuscar.value),grid)
-    })
+        })
+    }
 }
 
 function crearCatalogo(productos, grid){

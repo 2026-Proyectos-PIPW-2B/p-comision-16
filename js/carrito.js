@@ -2,22 +2,28 @@ import { getLocalStorage, setLocalStorage, crearImagen, setHistorial, sumarCompr
 window.addEventListener("load", iniciarCarrito)
 
 function iniciarCarrito(){
-    const listaCarrito = document.getElementById("lista-carrito")
-    listaCarrito.textContent = ""
-    const productos = getLocalStorage("carrito")
-    const carritoTotal = document.getElementById("carrito-total")
+    if(getLocalStorage("usuarioActivo").profile === "administrador"){
+        window.alert("Esta vista es exclusiva para usuarios")
+        location.href = "administracion.html"
+    } else{
+        const listaCarrito = document.getElementById("lista-carrito")
+        listaCarrito.textContent = ""
+        const productos = getLocalStorage("carrito")
+        const carritoTotal = document.getElementById("carrito-total")
 
-    const BtnConfirmarCompra = document.getElementById("carrito-confirmar")
-    BtnConfirmarCompra.addEventListener("click", confirmarCompra)
+        const BtnConfirmarCompra = document.getElementById("carrito-confirmar")
+        BtnConfirmarCompra.addEventListener("click", confirmarCompra)
 
-    crearLista(listaCarrito,productos)
-    carritoTotal.textContent = `Total: $${calcularTotal(productos)}`
-}
+        crearLista(listaCarrito,productos)
+        carritoTotal.textContent = `Total: $${calcularTotal(productos)}`
+    
 
-function crearLista(listaCarrito, productos){
-    for(const i in productos){
-        const li = crearElementoLista(productos[i])
-        listaCarrito.appendChild(li)
+        function crearLista(listaCarrito, productos){
+            for(const i in productos){
+                const li = crearElementoLista(productos[i])
+                listaCarrito.appendChild(li)
+            }
+        }
     }
 }
 
